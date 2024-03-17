@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-03-17T01:39:17.403Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="O0_Y-KwIrnk8sJQQnqOz" version="24.0.7" type="github">
+<mxfile host="app.diagrams.net" modified="2024-03-17T01:40:53.412Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0" etag="p94MhiqH6A9mC04yG0Jq" version="24.0.7" type="github">
   <diagram name="Page-1" id="QKJ2j_VdlwZN0hbpKNvx">
     <mxGraphModel dx="2086" dy="1957" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -237,12 +237,12 @@
         <mxCell id="tBHM0l0yFCZEbnYiTgFT-120" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-98">
           <mxGeometry y="310" width="190" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="tBHM0l0yFCZEbnYiTgFT-121" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-120">
+        <mxCell id="tBHM0l0yFCZEbnYiTgFT-121" value="createdAt" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-120">
           <mxGeometry width="95" height="40" as="geometry">
             <mxRectangle width="95" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="tBHM0l0yFCZEbnYiTgFT-122" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontStyle=1;fontSize=13;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-120">
+        <mxCell id="tBHM0l0yFCZEbnYiTgFT-122" value="Date" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontStyle=1;fontSize=13;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-120">
           <mxGeometry x="95" width="95" height="40" as="geometry">
             <mxRectangle width="95" height="40" as="alternateBounds" />
           </mxGeometry>
@@ -250,12 +250,12 @@
         <mxCell id="tBHM0l0yFCZEbnYiTgFT-123" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-98">
           <mxGeometry y="350" width="190" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="tBHM0l0yFCZEbnYiTgFT-124" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-123">
+        <mxCell id="tBHM0l0yFCZEbnYiTgFT-124" value="endedAt" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-123">
           <mxGeometry width="95" height="40" as="geometry">
             <mxRectangle width="95" height="40" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="tBHM0l0yFCZEbnYiTgFT-125" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontStyle=1;fontSize=13;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-123">
+        <mxCell id="tBHM0l0yFCZEbnYiTgFT-125" value="Date" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;fontStyle=1;fontSize=13;" vertex="1" parent="tBHM0l0yFCZEbnYiTgFT-123">
           <mxGeometry x="95" width="95" height="40" as="geometry">
             <mxRectangle width="95" height="40" as="alternateBounds" />
           </mxGeometry>
