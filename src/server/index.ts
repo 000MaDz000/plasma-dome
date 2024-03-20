@@ -5,7 +5,7 @@ dotenv.config(); // load .env files
 import express from "express";
 import { createServer } from "http";
 import next from "next";
-import dbConnectionPromise from "../models";
+import dbConnectionPromise, { User, Invoice, Image, Product } from "../models";
 import throwFail from "./functions/throw-fail";
 
 const PORT = (process.env.PORT || 3000) as number;
@@ -29,13 +29,14 @@ const handle = nextServer.getRequestHandler();
 
     console.log("");
     console.log("preparing the next.js server ...".yellow);
-    await nextServer.prepare();
+    await nextServer.prepare().catch((err) => throwFail("failed to start next.js"));
     console.log("next.js server is now running".green, `on port: ${PORT}`.blue);
 
+
+    server.listen(3000);
 })();
 
 
 app.use(async (req, res) => {
     handle(req, res);
 });
-

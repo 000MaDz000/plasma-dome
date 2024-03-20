@@ -20,4 +20,5 @@ const ImageSchema = new mongoose.Schema<IImage>({
 });
 
 const Image = mongoose.model("Image", ImageSchema) as Model<IImage>;
+global.models.Image = Image;
 export default Image;

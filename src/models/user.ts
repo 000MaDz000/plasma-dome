@@ -24,4 +24,6 @@ const UserSchema = new mongoose.Schema<IUser>({
 });
 
 const User = mongoose.model('User', UserSchema) as Model<IUser>;
+
+global.models.User = User;
 export default User;

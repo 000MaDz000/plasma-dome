@@ -42,4 +42,7 @@ const InvoiceSchema = new Schema<IInvoice>({
     "endedAt": { type: Date }
 });
 
-export const InvoicesModel = mongoose.model("invoice", InvoiceSchema) as Model<IInvoice>;
+
+const InvoicesModel = mongoose.model("invoice", InvoiceSchema) as Model<IInvoice>;
+global.models.Invoice = InvoicesModel;
+export default InvoicesModel;
