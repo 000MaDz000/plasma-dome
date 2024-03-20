@@ -8,7 +8,6 @@ import next from "next";
 import dbConnectionPromise from "../models";
 import throwFail from "./functions/throw-fail";
 
-
 const PORT = (process.env.PORT || 3000) as number;
 const app = express();
 const server = createServer(app);
@@ -23,30 +22,20 @@ const handle = nextServer.getRequestHandler();
 
 
 (async () => {
-    console.log("connecting to the database");
-    console.log("db url:", process.env.MONGO_CONNECTION_URL);
+    console.log("connecting to the database".yellow);
 
     await dbConnectionPromise.catch(() => throwFail("database connection fails"));
-    console.log("database connected successfully");
+    console.log("database connected successfully".green);
 
     console.log("");
     console.log("preparing the next.js server ...".yellow);
     await nextServer.prepare();
-    console.log("next.js server is now running".green);
+    console.log("next.js server is now running".green, `on port: ${PORT}`.blue);
 
 })();
-
-//     console.log("server prepared");
-
-//     // start the server
-//     server.listen(PORT, () => {
-//         console.log(`server started at port: ${PORT}`);
-//     });
-// });
-
-
 
 
 app.use(async (req, res) => {
     handle(req, res);
 });
+
