@@ -1,5 +1,23 @@
 {
     "Index": {
-        "title": "مرحبا"
-    }
+        "title": "Plasmadome",
+        "body": {
+            "header": "مدينة القبة",
+            "line1": "اختر عربتك",
+            "line2": "املأها"
+        },
+        "footer": {
+            "contact": "اتصل بنا",
+            "facebook": "Facebook",
+            "twitter": "Twitter"
+        }
+    },
+    "branches": {
+        "paints": {
+            "title": "البوادر",
+            "content": "اختر لون منزلك"
+        }
+    },
+    "signup": "التسجيل",
+    "login": "تسجيل الدخول"
 }

@@ -1,6 +1,22 @@
 {
     "Index": {
-        "title": "hello world"
+        "title": "Plasmadome",
+        "body": {
+            "header": "the Dome City",
+            "line1": "Pick Your Cart",
+            "line2": "Fill It"
+        },
+        "footer": {
+            "contact": "Contact",
+            "facebook": "Facebook",
+            "twitter": "Twitter"
+        }
+    },
+    "branches": {
+        "paints": {
+            "title": "Paints",
+            "content": "pick your home color"
+        }
     },
     "signup": "Sign Up",
     "login": "Login"
