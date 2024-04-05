@@ -8,8 +8,12 @@ import SurviceCard from "../_components/survice-card";
 import { Footer } from "flowbite-react";
 import LandingHeaderMenu from "../_components/landing-header-menu";
 import { NextIntlClientProvider } from "next-intl";
-import { FaFacebookF, FaTwitter } from "react-icons/fa6";
 import { FaFacebookSquare, FaTwitterSquare } from "react-icons/fa";
+import TermsLinks from "../_components/terms-links";
+import LinkGroup from "../_components/link-group";
+import FooterTitle from "../_components/footer-title";
+import ContactLinks from "../_components/contact-links";
+import SurviceCards from "../_components/survice-cards";
 
 export default async function Index() {
     const t = await getTranslations("Index");
@@ -44,35 +48,15 @@ export default async function Index() {
                     </div>
                 </section>
 
-                <section className="text-slate-950 grid gap-3 justify-center items-center mx-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <SurviceCard content="pick your home color" title="Paints" icon="/r.png" />
-                    <SurviceCard content="pick your home color" title="Paints" icon="/h.jpeg" />
-                    <SurviceCard content="pick your home color" title="Paints" icon="/k.jpeg" />
+                <h1 className="text-4xl font-semibold mx-8">{t("sections")}</h1>
+                <section className="text-slate-950 grid gap-3 justify-center items-center mx-2 [grid-template-columns:repeat(auto-fit,minmax(21rem,1fr))]">
+                    <SurviceCards />
                 </section>
 
 
-                <Footer className="bg-slate-600 text-white font-serif p-4">
-
-                    <Footer.LinkGroup title={t("footer.contact")} itemType="link" className="flex flex-col w-fit">
-                        <Footer.Title title={t("footer.contact")} className="font-semibold text-center" />
-                        <Footer.Link href="www.facebook.com/plasmadome" title="contact on facebook" className="flex flex-row gap-2" >
-                            <div className="flex items-center gap-1">
-                                <FaFacebookSquare />
-                                {t("footer.facebook")}
-                            </div>
-                        </Footer.Link>
-                        <Footer.Link href="www.twitter.com/plasmadome" title="contact on twitter" >
-                            <div className="flex items-center gap-1">
-                                <FaTwitterSquare />
-                                {t("footer.twitter")}
-                            </div>
-
-                        </Footer.Link>
-                    </Footer.LinkGroup>
-
-                    <Footer.Divider className="my-3" />
-                    <Footer.Title title="Copyright" />
-                    <Footer.Copyright by="MaDz" className="" />
+                <Footer className="bg-slate-600 text-white font-serif p-4 flex flex-col md:flex-row gap-8 items-start justify-around">
+                    <ContactLinks />
+                    <TermsLinks />
                 </Footer>
 
             </NextIntlClientProvider>

@@ -16,7 +16,7 @@ const SurviceCard: React.FC<SurviceCardProps> = ({ icon, title, content }) => {
     return (
         <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer">
             <div className="flex items-center mb-4">
-                <Image src={icon} alt="Branch Icon" width={40} height={40} className="object-cover rounded-md mr-4" />
+                <Image src={icon} alt="Branch Icon" width={40} height={40} className="object-cover rounded-md mr-4 shadow-sm bg-gradient-to-r from-slate-200 to-gray-200 via-gray-300" />
                 <h1 className="text-2xl font-bold">{title}</h1>
             </div>
             <p>{content}</p>

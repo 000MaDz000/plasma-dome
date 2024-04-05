@@ -10,12 +10,25 @@
             "contact": "Contact",
             "facebook": "Facebook",
             "twitter": "Twitter"
-        }
+        },
+        "sections": "Sections"
     },
     "branches": {
         "paints": {
             "title": "Paints",
             "content": "pick your home color"
+        },
+        "electronics": {
+            "title": "Electronics",
+            "content": "Select from our wide range of Electronic Goods and Home Appliances."
+        }
+    },
+    "Links": {
+        "terms": {
+            "title": "Terms",
+            "payments": "Payments",
+            "purchase": "Purchase",
+            "returns-exchanges": "Returns and Exchanges"
         }
     },
     "signup": "Sign Up",
