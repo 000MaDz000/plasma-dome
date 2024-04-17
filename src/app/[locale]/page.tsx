@@ -1,17 +1,12 @@
-import { getMessages, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import Header from "../_components/header";
 import LoginButton from "../_components/login-button";
 import SignupButton from "../_components/signup-button";
 import Image from "next/image";
 import i from "../../../public/h.jpeg";
-import SurviceCard from "../_components/survice-card";
 import { Footer } from "flowbite-react";
 import LandingHeaderMenu from "../_components/landing-header-menu";
-import { NextIntlClientProvider } from "next-intl";
-import { FaFacebookSquare, FaTwitterSquare } from "react-icons/fa";
 import TermsLinks from "../_components/terms-links";
-import LinkGroup from "../_components/link-group";
-import FooterTitle from "../_components/footer-title";
 import ContactLinks from "../_components/contact-links";
 import SurviceCards from "../_components/survice-cards";
 

@@ -5,7 +5,7 @@ dotenv.config(); // load .env files
 import express from "express";
 import { createServer } from "http";
 import next from "next";
-import dbConnectionPromise, { User, Invoice, Image, Product } from "../models";
+import dbConnectionPromise from "../models";
 import throwFail from "./functions/throw-fail";
 
 const PORT = (process.env.PORT || 3000) as number;
