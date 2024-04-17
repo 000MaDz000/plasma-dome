@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server"
 import SignupWaysButtons from "./signup-ways-buttons"
-import ConfirmSignupForm from "./confirm-signup-form"
 import StandardLoginAction from "../_actions/standard-login"
+import ConfirmSignupButton from "./confirm-signup-button"
 
 export default async function SignupForm() {
     const t = await getTranslations("Signup")
@@ -18,7 +18,7 @@ export default async function SignupForm() {
                 {/* <input type="password" placeholder={t("password")} autoComplete="password" name="password" /> */}
                 {/* <input type="password" placeholder={t("confirm_password")} autoComplete="password" name="confirm-password" /> */}
                 <div className="mt-4">
-                    <ConfirmSignupForm />
+                    <ConfirmSignupButton />
                 </div>
             </form>
 

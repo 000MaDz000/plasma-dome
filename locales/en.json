@@ -13,6 +13,19 @@
         },
         "sections": "Sections"
     },
+    "Signup": {
+        "page-title": "Join Plasmadome - The Dome City",
+        "description": "Become a part of the Plasmadome community. Sign up now to start ordering and saving.",
+        "title": "Join Plasmadome",
+        "email-or-mobile": "Mobile number or Email Address",
+        "button": "Confirm",
+        "google-button": "Signup With Google",
+        "facebook-button": "Signup With FaceBook",
+        "code-input": "verification code",
+        "code-confirm": "Confirm Code",
+        "enter-code-title": "write the verification code",
+        "invalid-code": "the code is wrong"
+    },
     "branches": {
         "paints": {
             "title": "Paints",
@@ -32,5 +45,8 @@
         }
     },
     "signup": "Sign Up",
-    "login": "Login"
+    "login": "Login",
+    "responses": {
+        "unsupported-format": "the format is unsupported"
+    }
 }
