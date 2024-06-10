@@ -7,6 +7,8 @@ import { createServer } from "http";
 import next from "next";
 import dbConnectionPromise from "../models";
 import throwFail from "./functions/throw-fail";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 const PORT = (process.env.PORT || 3000) as number;
 const app = express();
@@ -19,7 +21,11 @@ const nextServer = next({
 });
 
 const handle = nextServer.getRequestHandler();
+const sessionStore = MongoStore.create({
+    mongoUrl: process.env.MONGO_CONNECTION_URL,
+});
 
+global.appSessions = sessionStore;
 
 (async () => {
     console.log("connecting to the database".yellow);
@@ -36,6 +42,11 @@ const handle = nextServer.getRequestHandler();
     server.listen(3000);
 })();
 
+
+app.use(session({ "store": sessionStore, secret: "MADZZZ", "saveUninitialized": true }));
+app.use("/api", (req, res) => {
+    appSessions.get(req.sessionID, (err, s) => console.log(err, s))
+})
 
 app.use(async (req, res) => {
     handle(req, res);

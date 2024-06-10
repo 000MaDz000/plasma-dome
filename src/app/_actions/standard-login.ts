@@ -6,6 +6,7 @@ import { Ghost } from "../_classes/models";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import getLocale from "../_functions/get-locale";
+import session from "express-session";
 const emailRegex = /\w+\.\w+/ig;
 
 export default async function StandardLoginAction(data: FormData) {
@@ -44,8 +45,27 @@ export async function verifyCode(data: FormData) {
     if (!code || code.length !== 8) return 400;
 
     const ghost = await Ghost.findById(id);
+    const sid = cookies().get("connect.sid")?.value as string;
+
     if (ghost?.code !== code) {
         return 400;
+    }
+
+
+    let sess: session.SessionData | null | undefined = await new Promise(r => {
+        appSessions.get(sid, (err, sess) => {
+            r(sess as session.SessionData);
+        });
+    });
+
+    if (!sess) {
+        sess = {} as unknown as session.SessionData;
+    }
+
+    if (!sess.authorized) {
+        sess.user = ghost;
+        sess.authorized = true;
+        appSessions.set(sid, sess);
     }
 
     redirect(`/${getLocale()}/home`)
