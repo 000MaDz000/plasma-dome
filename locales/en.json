@@ -13,6 +13,29 @@
         },
         "sections": "Sections"
     },
+    "Store": {
+        "header": {
+            "searchPlaceholder": "Search here",
+            "your cart": "Your Cart",
+            "your orders": "Your Orders"
+        },
+        "body": {
+            "product": {
+                "addToCart": "Add To Cart",
+                "name": "Product Name",
+                "description": "product Description",
+                "quantity": "Quantity",
+                "update": "Update",
+                "delete": "Delete",
+                "empty cart": "Your Shopping Cart Is Empty !",
+                "close cart": "Close The Cart",
+                "confirm edit": "Confirm"
+            },
+            "alerts": {
+                "close": "Close"
+            }
+        }
+    },
     "Signup": {
         "page-title": "Join Plasmadome - The Dome City",
         "description": "Become a part of the Plasmadome community. Sign up now to start ordering and saving.",

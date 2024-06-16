@@ -1,6 +1,7 @@
 import mongoose, { Model, ObjectId } from "mongoose";
 
 export interface IProduct {
+    _id: string;
     name: string;
     categories: string[];
     images: ObjectId[];

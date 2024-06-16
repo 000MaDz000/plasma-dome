@@ -1,6 +1,6 @@
 import MongoStore from "connect-mongo";
 import { GhostModelType, ImageModelType, InvoiceModelType, ProductModelType, UserModelType } from "../src/models/index"
-import { UserInfo } from "os";
+import { ICartProduct } from "@/app/_actions/get-cart-data";
 declare global {
     var models: {
         User?: UserModelType;
@@ -17,5 +17,10 @@ declare module "express-session" {
     interface SessionData {
         user: UserInfo;
         authorized?: boolean;
+        cart: CartData;
     }
+}
+
+export interface CartData {
+    products: ICartProduct[]
 }
