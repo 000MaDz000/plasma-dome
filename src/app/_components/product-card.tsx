@@ -2,7 +2,6 @@ import { IImage } from "@/models/image";
 import { IProduct } from "@/models/product";
 import { Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
-import Image from "next/image";
 import AddToCartButton from "./add-to-cart-button";
 
 
@@ -12,7 +11,7 @@ export default async function ProductCard({ isAddedToCart, product }: { isAddedT
     return (
         <Card className="shadow-lg hover:border-gray-200 border-transparent border transition-colors">
             <CardMedia>
-                <Image src={((product.images[0] as unknown as IImage).relativeUrl.toString() || "") as string} width={1024} height={1024} alt="" />
+                <img src={((product.images[0] as unknown as IImage).relativeUrl.toString() || "") as string} width={1024} height={1024} alt="" />
             </CardMedia>
 
             <CardContent>
