@@ -13,6 +13,35 @@
         },
         "sections": "Sections"
     },
+    "Dashboard": {
+        "links": {
+            "home": "Home",
+            "orders": "Orders",
+            "products": "Products",
+            "payments": "Payments",
+            "reports": "Reports",
+            "settings": "Settings"
+        },
+        "header": {
+            "notifications": "Notifications",
+            "your account": "Your Account"
+        },
+        "products": {
+            "create product": "Create New Product",
+            "addToCart": "Add To Cart",
+            "name": "Product Name",
+            "description": "product Description",
+            "quantity": "Quantity",
+            "categories": "Categories",
+            "images": "Product Image",
+            "price": "Price",
+            "update": "Update",
+            "delete": "Delete",
+            "confirm edit": "Confirm",
+            "upload image": "Upload Image",
+            "show more": "Show More"
+        }
+    },
     "Store": {
         "header": {
             "searchPlaceholder": "Search here",
@@ -25,6 +54,9 @@
                 "name": "Product Name",
                 "description": "product Description",
                 "quantity": "Quantity",
+                "categories": "Categories",
+                "image": "Product Image",
+                "price": "Price",
                 "update": "Update",
                 "delete": "Delete",
                 "empty cart": "Your Shopping Cart Is Empty !",
