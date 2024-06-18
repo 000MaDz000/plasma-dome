@@ -47,19 +47,14 @@ ProductsRoute.post("/", multer().single("images"), async (req: Request<{}, {}, O
         data.price = parseFloat(data.price as unknown as string);
 
         if (!req.file) {
-            console.log("file");
-
             return res.sendStatus(400)
         };
 
         if (!data.categories) {
-            console.log("categories");
             return res.sendStatus(400);
         };
 
         if (typeof data.name !== "string" || isNaN(data.price) || typeof data.description !== "string") {
-            console.log("name or price or description");
-
             return res.sendStatus(400);
         };
         const imgName = randomUUID() + req.file.originalname.slice(req.file.originalname.lastIndexOf("."));

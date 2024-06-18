@@ -39,7 +39,9 @@
             "delete": "Delete",
             "confirm edit": "Confirm",
             "upload image": "Upload Image",
-            "show more": "Show More"
+            "show more": "Show More",
+            "count": "Products Count",
+            "recommended count": "We Recommend Add {recommended} Products At Least"
         }
     },
     "Store": {

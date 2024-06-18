@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { ProductsApi } from "../_classes/api";
 import { ICartProduct } from "../_actions/get-cart-data";
+import ProductsTableRow from "./products-table-row";
 
 export default function ProductsTable() {
     const t = useTranslations("Dashboard.products");
@@ -35,15 +36,7 @@ export default function ProductsTable() {
                 </TableHead>
 
                 <TableBody>
-                    {data.map((p) => (
-                        <TableRow>
-                            <TableCell><img src={p.images[0]} className="w-16" /></TableCell>
-                            <TableCell>{p.name}</TableCell>
-                            <TableCell>{p.categories}</TableCell>
-                            <TableCell>{p.description}</TableCell>
-                            <TableCell>{p.price}</TableCell>
-                        </TableRow>
-                    ))}
+                    {data.map((p) => <ProductsTableRow product={p} />)}
 
                 </TableBody>
             </Table>

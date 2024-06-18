@@ -1,6 +1,7 @@
 'use client';
 
 import CreateProductForm from "@/app/_components/create-product-form";
+import ProductsCountBox from "@/app/_components/dashboard-products-count-box";
 import ProductsTable from "@/app/_components/products-table";
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
@@ -12,7 +13,7 @@ export default function DashboardProductsPage() {
         <div className="flex flex-col gap-4">
             <Paper>
                 <Box className="grid m-3 gap-3 grid-cols-3 h-32">
-                    <Skeleton />
+                    <ProductsCountBox />
                     <Skeleton />
                     <Skeleton />
                 </Box>
