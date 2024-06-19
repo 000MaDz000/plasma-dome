@@ -11,6 +11,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import ApiRoute from "./routes/api";
 import { imagesPath } from "./functions/static";
+import DashboardLocker from "./routes/lockers/pages/dashboard";
 
 const PORT = (process.env.PORT || 3000) as number;
 const app = express();
@@ -44,9 +45,10 @@ global.appSessions = sessionStore;
     server.listen(3000);
 })();
 
+app.use(session({ "store": sessionStore, secret: "MADZZZ", "saveUninitialized": true }));
 app.use("/images", express.static(imagesPath));
 app.use("/api", ApiRoute);
-app.use(session({ "store": sessionStore, secret: "MADZZZ", "saveUninitialized": true }));
+app.use(DashboardLocker);
 app.use(async (req, res) => {
     handle(req, res);
 });

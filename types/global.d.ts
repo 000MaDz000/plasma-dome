@@ -27,6 +27,7 @@ export interface UserInfo {
     name: string,
     mobile: string,
     verifyCode?: string,
+    role?: "admin";
 }
 
 export interface CartData {
