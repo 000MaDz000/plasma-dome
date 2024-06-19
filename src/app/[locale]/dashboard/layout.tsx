@@ -4,7 +4,7 @@ import Header from "@/app/_components/header";
 import OpenCloseContext from "@/app/_contexts/openclose";
 import { Box, IconButton, Paper, Tooltip } from "@mui/material";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBell } from "react-icons/fa";
 import { FaPerson } from "react-icons/fa6";
 import { MdMenu } from "react-icons/md";
@@ -55,7 +55,7 @@ export default function DashboardPage({ children }: { children: React.ReactNode 
                 </Box>
 
                 {/* dashboard page content */}
-                <Box className="my-2 mx-4 grow h-full">
+                <Box className="my-2 mx-4 grow h-full overflow-hidden">
                     {children}
                 </Box>
 

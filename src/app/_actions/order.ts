@@ -3,6 +3,9 @@
 import { randomUUID } from "crypto";
 import session from "../_functions/session";
 import { Order } from "../_classes/models";
+import isAdmin from "../_functions/is-admin";
+import { redirect } from "next/navigation";
+import { IOrder } from "@/models/order";
 
 export async function setOrderData(data: FormData) {
     const name = data.get("name");
@@ -56,4 +59,16 @@ export async function createOrder(verifyCode: string) {
 
     return orderData;
 
+}
+
+export default async function EndOrder(id: string) {
+    if (!id || id.length !== 24) return 400;
+    const order = await Order.findById(id);
+
+    if (!order) return 400;
+
+    order.ended = true;
+    await order.save();
+
+    return 200;
 }

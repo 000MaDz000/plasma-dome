@@ -7,14 +7,14 @@ import { ProductsApi } from "../_classes/api";
 import { ICartProduct } from "../_actions/get-cart-data";
 import ProductsTableRow from "./products-table-row";
 
-export default function ProductsTable() {
+export default function ProductsTable({ products }: { products?: ICartProduct[] }) {
     const t = useTranslations("Dashboard.products");
-    const [data, setData] = useState<ICartProduct[]>([]);
-    const [isPending, setIsPending] = useState(true);
+    const [data, setData] = useState<ICartProduct[]>(products ? products : []);
+    const [isPending, setIsPending] = useState(products ? false : true);
     const api = useMemo(() => new ProductsApi(), []);
 
     useEffect(() => {
-        if (isPending) {
+        if (isPending && !products) {
             api.fetchProducts().then(prod => {
                 setData([...data, ...prod]);
             });
@@ -51,7 +51,10 @@ export default function ProductsTable() {
                 ) : null
             }
 
-            <Button className="p-3" fullWidth onClick={() => setIsPending(true)}>{t("show more")}</Button>
+            {
+                !products &&
+                <Button className="p-3" fullWidth onClick={() => setIsPending(true)}>{t("show more")}</Button>
+            }
         </Box>
     )
 }

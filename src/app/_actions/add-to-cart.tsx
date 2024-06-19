@@ -1,9 +1,7 @@
 'use server';
 
-import { cookies } from "next/headers";
 import { Product } from "../_classes/models";
 import session from "../_functions/session";
-import { SessionData } from "express-session";
 import FilterProduct from "../_functions/filter-product";
 
 export default async function AddToCart(productId: string) {

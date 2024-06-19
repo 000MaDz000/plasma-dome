@@ -42,6 +42,24 @@
             "show more": "Show More",
             "count": "Products Count",
             "recommended count": "We Recommend Add {recommended} Products At Least"
+        },
+        "orders": {
+            "customer name": "Customer Name",
+            "customer phone": "Customer Phone",
+            "delevery location": "Delevery Location",
+            "date": "Date",
+            "state": "state",
+            "total price": "total price",
+            "pending": "Pending",
+            "ended": "Ended",
+            "egp": "{price} EGP",
+            "no data": "There Is No Orders Yet !",
+            "orders count": "Available Orders {count}",
+            "ended orders count": "Ended Orders {count}",
+            "pending orders count": "Pending Orders {count}",
+            "ended confirm": "Mark As Ended",
+            "is ended": "Are The Order Ended ?",
+            "mark as ended alert": "When You Click On this Button, The Order Will Be Ended"
         }
     },
     "Store": {

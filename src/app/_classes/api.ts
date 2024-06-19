@@ -1,3 +1,4 @@
+import { IOrder } from "@/models/order";
 import { ICartProduct } from "../_actions/get-cart-data";
 
 export class ProductsApi {
@@ -27,4 +28,26 @@ export class ProductsApi {
         }
     }
 
+}
+
+export class OrdersApi {
+    private lastFetchId: string | null;
+
+    constructor() {
+        this.lastFetchId = null;
+    }
+
+    async fetchOrders() {
+        try {
+
+            let orders = await fetch("/api/dashboard/orders" + (this.lastFetchId ? `/?lastId=${this.lastFetchId}` : "")).then(res => res.json()) as IOrder[];
+            this.lastFetchId = orders[orders.length - 1]._id;
+
+
+            return orders;
+        }
+        catch (err) {
+            return [];
+        }
+    }
 }

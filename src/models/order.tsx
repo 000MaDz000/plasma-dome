@@ -2,11 +2,13 @@ import { ICartProduct } from "@/app/_actions/get-cart-data";
 import { Model, model, Schema } from "mongoose";
 
 export interface IOrder {
+    _id?: any;
     customerName: string;
     customerPhone: string;
     deleveryAddress: string;
     orderDate: Date;
     products: ICartProduct[];
+    ended: boolean;
     totalPrice: number;
 }
 
@@ -26,6 +28,10 @@ const OrderSchema = new Schema<IOrder>({
     orderDate: {
         type: Date,
         default: Date.now
+    },
+    ended: {
+        type: Boolean,
+        default: false,
     },
     deleveryAddress: String,
     products: {
@@ -57,8 +63,8 @@ const OrderSchema = new Schema<IOrder>({
     },
 })
 
+OrderSchema.index({ "ended": -1 });
 const Order = model("Order", OrderSchema) as Model<IOrder>;
-
 global.models.Order = Order;
 
 export default Order;
