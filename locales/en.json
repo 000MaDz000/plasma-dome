@@ -63,7 +63,19 @@
                 "delete": "Delete",
                 "empty cart": "Your Shopping Cart Is Empty !",
                 "close cart": "Close The Cart",
-                "confirm edit": "Confirm"
+                "confirm edit": "Confirm",
+                "confirm order": "Confirm Order",
+                "egp": "{price} EGP",
+                "total": "Total Price"
+            },
+            "order": {
+                "fill fields": "Please Fill The Fields",
+                "name": "Your Name",
+                "mobile": "Your Mobile",
+                "code": "Verification Code",
+                "confirm data": "Confirm Data",
+                "invalid code": "The Code is Invalid",
+                "cart orders": "Your Cart Products"
             },
             "alerts": {
                 "close": "Close"

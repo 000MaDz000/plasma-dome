@@ -1,16 +1,26 @@
 'use client';
 
-import { Grid, Skeleton, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Button, Grid, Skeleton, Typography } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
 import getCartData, { ICartProduct } from "../_actions/get-cart-data";
 import CartProduct from "./cart-product";
 import { useTranslations } from "next-intl";
 import Modal from "./modal";
+import Link from "next/link";
 
 
 export default function CartModal({ open, onClose }: { open: boolean, onClose: () => void }) {
     const [cartData, setCartData] = useState<ICartProduct[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    const totalPrice = useMemo(() => {
+        let total = 0;
+        for (let product of cartData) {
+            total += product.price * product.quantity;
+        }
+        return total
+    }, [cartData]);
+
     const t = useTranslations("Store.body.product");
 
     useEffect(() => {
@@ -24,10 +34,6 @@ export default function CartModal({ open, onClose }: { open: boolean, onClose: (
         }
     });
 
-    const onDeleteFromCart = (productId: string) => {
-
-    }
-
     return (
         isLoading ? (
             <Modal open onClose={() => { }}>
@@ -39,7 +45,7 @@ export default function CartModal({ open, onClose }: { open: boolean, onClose: (
             : (
 
                 <Modal open={open} onClose={onClose}>
-                    <Grid className="grid md:grid-cols-2">
+                    <Grid className="grid lg:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
 
                         {
                             cartData.length ? cartData.map((product) => (
@@ -49,6 +55,16 @@ export default function CartModal({ open, onClose }: { open: boolean, onClose: (
                             )
                         }
                     </Grid>
+
+                    <div className="m-3 flex justify-between">
+                        <Button>
+                            <Link href="/orders/create">
+                                {t("confirm order")}
+                            </Link>
+                        </Button>
+
+                        <Typography color={"green"}>{t("egp", { price: totalPrice })}</Typography>
+                    </div>
                 </Modal>
             )
     )

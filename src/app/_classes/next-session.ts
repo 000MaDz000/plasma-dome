@@ -11,6 +11,10 @@ export default class NextSession {
         if (!this.data.cart) {
             this.data.cart = { products: [] }
         }
+
+        if (!this.data.user) {
+            this.data.user = {};
+        }
     }
 
 

@@ -1,7 +1,6 @@
 'use client';
 import { Card, CardContent, CardMedia, Typography, CardActions, IconButton, Tooltip, TextField, Button, Box } from "@mui/material";
 import { DeleteFromCart, ICartProduct, UpdateQuantity } from "../_actions/get-cart-data";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { useState } from "react";
@@ -24,15 +23,20 @@ export default function CartProduct({ product, onUpdate }: { product: ICartProdu
     }
 
     return (
-        <Card>
-            <CardMedia >
-                <Image src={product.images[0]} width={1024} height={1024} alt="" />
-            </CardMedia>
+        <Card className="flex flex-col justify-between">
 
-            <CardContent>
-                <Typography className="flex justify-between ">{t("name")}: <span>{product.name}</span></Typography>
-                <Typography className="flex justify-between ">{t("quantity")}: <span>{product.quantity}</span></Typography>
-            </CardContent>
+            <div>
+                <CardMedia >
+                    <img src={product.images[0]} alt="" />
+                </CardMedia>
+
+                <CardContent>
+                    <Typography className="flex justify-between ">{t("name")}: <span>{product.name}</span></Typography>
+                    <Typography className="flex justify-between ">{t("price")}:<span>{t("egp", { price: product.price })}</span></Typography>
+                    <Typography className="flex justify-between ">{t("quantity")}: <span>{product.quantity}</span></Typography>
+                    <Typography className="flex justify-between ">{t("total")}: <span>{t("egp", { price: product.price * product.quantity })}</span></Typography>
+                </CardContent>
+            </div>
 
             <CardActions>
                 <Tooltip title={t("update")}>
@@ -55,6 +59,8 @@ export default function CartProduct({ product, onUpdate }: { product: ICartProdu
                     <Button fullWidth onClick={() => onUpdateQuantity()}>{t("confirm edit")}</Button>
                 </Box>
             </Modal>
+
+
         </Card>
     )
 }
