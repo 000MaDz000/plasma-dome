@@ -52,8 +52,8 @@ export default function RequiredOrderDataForm({ onOrderCreated, disabled }: { on
     return (
         <form className="flex flex-col gap-5" action={onConfirm}>
             <Typography variant="h5">{t("fill fields")}</Typography>
-            <TextField disabled={disabled} inputProps={{ className: disabled && "cursor-not-allowed" || "" }} name="name" placeholder={t("name")} color={orderErr ? "error" : undefined} focused={orderErr} />
-            <TextField disabled={disabled} inputProps={{ className: disabled && "cursor-not-allowed" || "" }} name="mobile" placeholder={t("mobile")} color={orderErr ? "error" : undefined} focused={orderErr} />
+            <TextField disabled={disabled} name="name" placeholder={t("name")} color={orderErr ? "error" : undefined} focused={orderErr} />
+            <TextField disabled={disabled} name="mobile" placeholder={t("mobile")} color={orderErr ? "error" : undefined} focused={orderErr} />
             <Button disabled={disabled} type="submit">{t("confirm data")}</Button>
         </form>
     )

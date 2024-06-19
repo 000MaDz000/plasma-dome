@@ -1,11 +1,31 @@
 'use client';
+
+import { useState, useEffect } from "react";
+import getCartData, { ICartProduct } from "../_actions/get-cart-data";
 import { Skeleton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { ICartProduct } from "../_actions/get-cart-data";
 
-export default function CreateOrderPage({ pending, data }: { pending: boolean, data: ICartProduct[] }) {
-
+export default function CreateOrderPage({ setDisabled }: { setDisabled: (val: boolean) => void }) {
+    const [data, setData] = useState<ICartProduct[]>([]);
+    const [pending, setPending] = useState(true);
     const t = useTranslations("Store.body.product")
+
+
+    useEffect(() => {
+        if (!pending) return;
+
+        getCartData().then(cart => {
+            setData([...data, ...cart]);
+            setPending(false);
+        });
+
+    }, [pending]);
+
+    if (!pending) {
+        if (data.length) {
+            setDisabled(false);
+        }
+    }
 
     return (
         <>
