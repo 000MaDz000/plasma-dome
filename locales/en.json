@@ -113,6 +113,28 @@
         "enter-code-title": "write the verification code",
         "invalid-code": "the code is wrong"
     },
+    "Login": {
+        "page title": "Join Plasmadome - The Dome City",
+        "enter name": "Please Enter Your Name",
+        "enter mobile": "Please Enter Your Mobile Number",
+        "enter password": "Password",
+        "enter code": "The Code Has Been Sent To You",
+        "enter confirm password": "Please Confirm the Password",
+        "name": "Your Name",
+        "mobile": "Your Phone Number",
+        "password": "password",
+        "code": "Verification Code",
+        "confirm password": "confirm password",
+        "next": "Next",
+        "errors": {
+            "mobile number not provided": "Mobile Number Is Required",
+            "code not provided": "Verification Code Is Required",
+            "wrong code": "The Code Is Wrong",
+            "password length": "Password Length Must Be 8 at least",
+            "wrong password": "The Password Is Wrong",
+            "unknown type": "Unknown Error Has Been Occurd"
+        }
+    },
     "branches": {
         "paints": {
             "title": "Paints",

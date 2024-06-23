@@ -26,7 +26,9 @@ declare module "express-session" {
 export interface UserInfo {
     name: string,
     mobile: string,
+    password: string,
     verifyCode?: string,
+    codeVeryfied?: boolean;
     role?: "admin";
 }
 
