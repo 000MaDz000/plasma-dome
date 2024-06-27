@@ -13,6 +13,7 @@ declare global {
     },
 
     var appSessions: MongoStore
+    var signedCookie: (cookie: string, secret: string | string[]) => string | false;
 }
 
 declare module "express-session" {

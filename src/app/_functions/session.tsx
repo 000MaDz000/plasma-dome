@@ -4,12 +4,15 @@ import NextSession from "../_classes/next-session";
 
 export default async function session() {
     const cookie = cookies();
-    const sid = cookie.get("connect.sid")?.value || "";
-    const sessionData: SessionData | null | undefined = await new Promise(r => {
-        appSessions.get(sid, (err, sess) => {
-            r(sess);
-        });
-    });
+    const unParserSid = cookie.get("connect.sid")?.value || "";
+    const sid = signedCookie(unParserSid, process.env.COOKIES_SECRET_KEY as string) as string;
+    // const sid = unParserSid;
 
-    return new NextSession(sid, sessionData as SessionData);
+    const sessionData: SessionData | null | undefined = await new Promise(r => {
+        appSessions.get(sid, (_err, sess) => {
+            r(sess as SessionData);
+        });
+    }) as SessionData;
+
+    return new NextSession(sid, { ...sessionData } as SessionData);
 }

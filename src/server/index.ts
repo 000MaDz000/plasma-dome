@@ -12,6 +12,7 @@ import MongoStore from "connect-mongo";
 import ApiRoute from "./routes/api";
 import { imagesPath } from "./functions/static";
 import DashboardLocker from "./routes/lockers/pages/dashboard";
+import { signedCookie } from "cookie-parser";
 
 const PORT = (process.env.PORT || 3000) as number;
 const app = express();
@@ -29,6 +30,7 @@ const sessionStore = MongoStore.create({
 });
 
 global.appSessions = sessionStore;
+global.signedCookie = signedCookie;
 
 (async () => {
     console.log("connecting to the database".yellow);
@@ -45,10 +47,14 @@ global.appSessions = sessionStore;
     server.listen(3000);
 })();
 
-app.use(session({ "store": sessionStore, secret: "MADZZZ", "saveUninitialized": true }));
+app.use(session({ "store": sessionStore, secret: process.env.COOKIES_SECRET_KEY as string, "saveUninitialized": true, cookie: { "httpOnly": false, "signed": true } }));
 app.use("/images", express.static(imagesPath));
 app.use("/api", ApiRoute);
 app.use(DashboardLocker);
+app.use((req, _res, next) => {
+    req.session.save();
+    next();
+})
 app.use(async (req, res) => {
     handle(req, res);
 });

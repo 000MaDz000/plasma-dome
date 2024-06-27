@@ -13,13 +13,19 @@ export default class NextSession {
         }
 
         if (!this.data.user) {
-            this.data.user = {};
+            this.data.user = {} as unknown as any;
         }
     }
 
 
 
-    save() {
-        appSessions.set(this.sessionId, this.data);
+    async save() {
+        console.log(this.sessionId);
+
+        await new Promise(r => {
+            appSessions.set(this.sessionId, this.data, () => r(null));
+        });
+
+
     }
 }

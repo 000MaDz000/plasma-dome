@@ -41,7 +41,7 @@ export async function ValidateLoginStep(type: ValidateType, data: string): Promi
             if (exists) {
                 sess.data.user.codeVeryfied = true;
                 sess.data.user.mobile = data;
-                sess.save();
+                await sess.save();
 
                 return {
                     type,
