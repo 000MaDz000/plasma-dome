@@ -124,7 +124,19 @@ export async function ValidateLoginStep(type: ValidateType, data: string): Promi
 
                 if (Exists.password === data) {
                     sess.data.authorized = true;
-                    sess.save();
+
+                    if (Exists.permissions.find((v => v.name === "admin"))) {
+                        sess.data.user.role = "admin";
+                        await sess.save();
+
+                        return {
+                            type,
+                            success: true,
+                            nextStep: "dashboard",
+                        }
+                    }
+
+                    await sess.save();
                     return {
                         type,
                         success: true,

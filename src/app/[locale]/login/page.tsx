@@ -5,7 +5,12 @@ import { redirect } from "next/navigation";
 export default async function LoginPage() {
     const sess = await session();
     if (sess.data.authorized) {
-        redirect("/store");
+        if (sess.data.user.role == "admin") {
+            redirect("/dashboard");
+        }
+        else {
+            redirect("/store");
+        }
     }
     return (
         <div>

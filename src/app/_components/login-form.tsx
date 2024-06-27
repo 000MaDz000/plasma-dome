@@ -55,6 +55,9 @@ export default function LoginForm() {
             if (res.success && !res.nextStep) {
                 router.replace("/store");
             }
+            else if (res.success && res.nextStep == "dashboard") {
+                router.replace("/dashboard");
+            }
 
             console.log(res);
 
