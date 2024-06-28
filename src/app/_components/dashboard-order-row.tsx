@@ -36,7 +36,9 @@ export default function DashboardOrderRow({ order, onOrderEnd }: { order: IOrder
                 details && (
                     <TableRow>
                         <TableCell colSpan={6} >
-                            <ProductsTable products={order.products} />
+                            <Paper variant="outlined">
+                                <ProductsTable products={order.products} />
+                            </Paper>
                         </TableCell>
                     </TableRow>
                 )
