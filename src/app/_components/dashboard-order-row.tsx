@@ -7,13 +7,18 @@ import { FaArrowDown } from "react-icons/fa";
 import Modal from "./modal";
 import ProductsTable from "./products-table";
 
-export default function DashboardOrderRow({ order, onOrderEnd }: { order: IOrder, onOrderEnd: () => void }) {
+export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled }: { order: IOrder, onOrderEnd: () => void, onOrderCanceled: () => void }) {
     const t = useTranslations("Dashboard.orders");
     const [details, setDetails] = useState(false);
     const [modal, setModal] = useState(false);
     const onClickEnd = () => {
         setModal(false);
         onOrderEnd();
+    }
+
+    const onCancel = async () => {
+        setModal(false);
+        onOrderCanceled();
     }
 
     return (
@@ -23,7 +28,7 @@ export default function DashboardOrderRow({ order, onOrderEnd }: { order: IOrder
                 <TableCell align="center">{order.customerPhone}</TableCell>
                 <TableCell align="center">{order.deleveryAddress || "-"}</TableCell>
                 <TableCell align="center">{order.orderDate.toString()}</TableCell>
-                <TableCell align="center">{order.ended ? t("ended") : t("pending")}</TableCell>
+                <TableCell align="center">{order.ended ? t("ended") : order.cancled?.status ? t("cancled") : t("pending")}</TableCell>
                 <TableCell align="center">{t("egp", { price: order.totalPrice })}</TableCell>
                 <TableCell>
                     <IconButton onClick={() => setDetails(!details)}>
@@ -45,7 +50,7 @@ export default function DashboardOrderRow({ order, onOrderEnd }: { order: IOrder
             }
 
             {
-                (modal && !order.ended) && (
+                (modal && !order.ended && !order.cancled?.status) && (
                     <Modal open onClose={() => setModal(false)}>
                         <Box className="flex flex-col gap-7">
                             <Box className="flex flex-col gap-3">
@@ -53,6 +58,7 @@ export default function DashboardOrderRow({ order, onOrderEnd }: { order: IOrder
                                 <Typography color="orange" className="text-center">{t("mark as ended alert")}</Typography>
                             </Box>
                             <Button color={"success"} onClick={onClickEnd}>{t("ended confirm")}</Button>
+                            <Button color={"error"} onClick={onCancel}>{t("cancel order")}</Button>
                         </Box>
                     </Modal>
                 )

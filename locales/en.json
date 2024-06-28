@@ -52,12 +52,14 @@
             "total price": "total price",
             "pending": "Pending",
             "ended": "Ended",
+            "cancled": "Cancled",
             "egp": "{price} EGP",
             "no data": "There Is No Orders Yet !",
             "orders count": "Available Orders {count}",
             "ended orders count": "Ended Orders {count}",
             "pending orders count": "Pending Orders {count}",
             "ended confirm": "Mark As Ended",
+            "cancel order": "Cancel The Order",
             "is ended": "Are The Order Ended ?",
             "mark as ended alert": "When You Click On this Button, The Order Will Be Ended"
         }

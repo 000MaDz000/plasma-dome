@@ -72,3 +72,19 @@ export default async function EndOrder(id: string) {
 
     return 200;
 }
+
+export async function CancelOrder(id: string) {
+    if (!id || id.length !== 24) return 400;
+    const order = await Order.findById(id);
+
+    if (!order) return 400;
+
+    order.cancled = {
+        status: true,
+        reason: "cancled by admin",
+    };
+
+    await order.save();
+
+    return 200;
+}

@@ -9,6 +9,10 @@ export interface IOrder {
     orderDate: Date;
     products: ICartProduct[];
     ended: boolean;
+    cancled?: {
+        status: boolean;
+        reason: string;
+    }
     totalPrice: number;
 }
 
@@ -32,6 +36,16 @@ const OrderSchema = new Schema<IOrder>({
     ended: {
         type: Boolean,
         default: false,
+    },
+    cancled: {
+        status: {
+            type: Boolean,
+            default: false,
+        },
+        reason: {
+            type: String,
+            default: "",
+        }
     },
     deleveryAddress: String,
     products: {

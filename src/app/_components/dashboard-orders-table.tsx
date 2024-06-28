@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { OrdersApi } from "../_classes/api";
 import { IOrder } from "@/models/order";
 import DashboardOrderRow from "./dashboard-order-row";
-import EndOrder from "../_actions/order";
+import EndOrder, { CancelOrder } from "../_actions/order";
 
 export default function DashboardOrdersTable() {
     const t = useTranslations("Dashboard.orders");
@@ -30,6 +30,14 @@ export default function DashboardOrdersTable() {
 
     }
 
+    const onOrderCanceled = async (order: IOrder) => {
+        CancelOrder(order._id).then(res => {
+            if (res === 200) {
+                setData(data.map(obj => obj._id === order._id ? { ...order, cancled: { status: true, reason: "" } } : obj));
+            }
+        })
+    }
+
     return (
         <>
             <Table>
@@ -48,7 +56,7 @@ export default function DashboardOrdersTable() {
                 <TableBody>
                     {
                         data.map((order) => (
-                            <DashboardOrderRow order={order} key={order._id} onOrderEnd={() => remove(order)} />
+                            <DashboardOrderRow order={order} key={order._id} onOrderEnd={() => remove(order)} onOrderCanceled={() => onOrderCanceled(order)} />
                         ))
                     }
                 </TableBody>
