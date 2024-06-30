@@ -37,7 +37,7 @@ export class OrdersApi {
         this.lastFetchId = null;
     }
 
-    async fetchOrders({ month, ended }: Partial<{ month: number, ended: boolean }>) {
+    async fetchOrders({ month, ended }: Partial<{ month: number, ended: boolean }> = {}) {
         try {
 
             let orders = await fetch(`/api/dashboard/orders/?${this.lastFetchId ? `/?lastId=${this.lastFetchId}&` : ""}${month ? `month=${month}&` : ""}${ended ? "ended=true" : ""}`).then(res => res.json()) as IOrder[];
