@@ -7,7 +7,7 @@ export default async function StoreBody() {
 
     return (
         <Container maxWidth="xl" className="mt-5">
-            <Grid className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            <Grid className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 grid-cols-2">
                 <>
                     {products.map(product => (
                         <ProductCard product={product} key={product._id.toString()} />
