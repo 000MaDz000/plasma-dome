@@ -42,12 +42,13 @@ export default function LoginForm() {
 
         (async () => {
             const res = await ValidateLoginStep(type as any, data);
+
             if (res?.errorMessage) {
                 setErrMessage(res.errorMessage);
                 return;
             }
 
-            if (res.nextStep) {
+            if (res.nextStep && res.nextStep !== "dashboard") {
                 setStep(typesHashmap[res.nextStep] as number)
                 return;
             }
@@ -55,11 +56,10 @@ export default function LoginForm() {
             if (res.success && !res.nextStep) {
                 router.replace("/store");
             }
-            else if (res.success && res.nextStep == "dashboard") {
+            if (res.success && res.nextStep == "dashboard") {
                 router.replace("/dashboard");
             }
 
-            console.log(res);
 
 
         })().then(() => {

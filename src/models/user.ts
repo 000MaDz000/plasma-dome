@@ -21,6 +21,9 @@ const UserSchema = new mongoose.Schema<IUser>({
 });
 
 const User = mongoose.model('User', UserSchema) as Model<IUser>;
-
+UserSchema.index({ mobile: 1 });
+UserSchema.index({ email: 1 });
+UserSchema.index({ createdAt: 1 });
+UserSchema.index({ "permissions.name": 1, "permissions.granted": 1 });
 global.models.User = User;
 export default User;

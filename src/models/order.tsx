@@ -78,6 +78,8 @@ const OrderSchema = new Schema<IOrder>({
 })
 
 OrderSchema.index({ "ended": -1 });
+OrderSchema.index({ "customerPhone": 1, "orderDate": 1 });
+OrderSchema.index({ "orderDate": 1 });
 const Order = model("Order", OrderSchema) as Model<IOrder>;
 global.models.Order = Order;
 

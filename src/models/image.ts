@@ -19,6 +19,8 @@ const ImageSchema = new mongoose.Schema<IImage>({
     }],
 });
 
+ImageSchema.index({ "relativeUrl": 1 });
+ImageSchema.index({ "relativePath": 1 });
 const Image = mongoose.model("Image", ImageSchema) as Model<IImage>;
 global.models.Image = Image;
 export default Image;
