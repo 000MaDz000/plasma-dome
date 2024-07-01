@@ -50,7 +50,7 @@ global.signedCookie = signedCookie;
 app.use(session({ "store": sessionStore, secret: process.env.COOKIES_SECRET_KEY as string, "saveUninitialized": true, cookie: { "httpOnly": false, "signed": true } }));
 app.use("/images", express.static(imagesPath));
 app.use("/api", ApiRoute);
-app.use(DashboardLocker);
+app.use("/:locale/dashboard", DashboardLocker);
 app.use((req, _res, next) => {
     req.session.save();
     next();

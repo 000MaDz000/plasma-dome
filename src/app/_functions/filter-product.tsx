@@ -10,6 +10,7 @@ export default function FilterProduct(product: Omit<IProduct, "images"> & { imag
         "images": product.images.map(val => val.relativeUrl),
         "name": product.name,
         "price": product.price,
+        showTypes: product.showTypes || []
     }
 }
 

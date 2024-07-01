@@ -1,12 +1,13 @@
 import { Product, Image } from "../../../models/";
 import { Request, Response, Router } from "express";
-import { ObjectId, UUID } from "bson";
-import { ICartProduct } from "@/app/_actions/get-cart-data";
+import { ObjectId } from "bson";
 import multer from "multer";
 import { randomUUID } from "crypto";
 import { join } from "path";
 import { writeFile } from "fs/promises";
 import FilterProduct from "../../../app/_functions/filter-product";
+import { IProduct } from "@/models/product";
+import DashboardLocker from "../lockers/pages/dashboard";
 
 const ProductsRoute = Router();
 
@@ -40,36 +41,53 @@ ProductsRoute.get("/?", async (req: Request<{}, {}, {}, { lastId?: string }>, re
     }
 });
 
-ProductsRoute.post("/", multer().single("images"), async (req: Request<{}, {}, Omit<Omit<ICartProduct, "images">, "_id">>, res: Response) => {
+ProductsRoute.post("/", DashboardLocker, multer().single("images"), async (req: Request<{}, {}, Omit<Omit<Omit<IProduct, "images"> & { showType: string, showTypeLevel: string }, "_id">, "showTypes">>, res: Response) => {
     try {
         const data = req.body;
-        console.log(data);
         data.price = parseFloat(data.price as unknown as string);
 
+        // checking the data
         if (!req.file) {
+            // console.log("File");
             return res.sendStatus(400)
         };
 
         if (!data.categories) {
+            // console.log("categories");
             return res.sendStatus(400);
         };
 
         if (typeof data.name !== "string" || isNaN(data.price) || typeof data.description !== "string") {
+            // console.log("name or descritpion");
             return res.sendStatus(400);
         };
+
+        // crete the image
         const imgName = randomUUID() + req.file.originalname.slice(req.file.originalname.lastIndexOf("."));
         const imgPath = join(__dirname, "../../../../images/", imgName);
         await writeFile(imgPath, req.file.buffer);
 
+        // set the image
         const image = new Image({ "relativePath": "/images/" + imgName, "relativeUrl": "/images/" + imgName });
         await image.save();
 
+        // create the product show types
+        const showTypes: any[] = [];
+
+        if ((data.showType == "f" || data.showType == "n") && data.showTypeLevel && !isNaN(parseInt(data.showTypeLevel))) {
+            showTypes.push({
+                showType: data.showType == "f" ? "featured" : "normal",
+                level: data.showTypeLevel,
+            })
+        }
+        // create the product
         const saveProduct = new Product({
             "categories": data.categories,
             "description": data.description,
             "name": data.name,
             "price": data.price,
             images: [image._id],
+            showTypes: showTypes,
         });
 
         await saveProduct.save();
@@ -77,7 +95,7 @@ ProductsRoute.post("/", multer().single("images"), async (req: Request<{}, {}, O
     }
     catch (err) {
         res.sendStatus(500);
-        console.log(err);
+        // console.log(err);
     }
 });
 

@@ -46,7 +46,11 @@
             "upload image": "Upload Image",
             "show more": "Show More",
             "count": "Products Count",
-            "recommended count": "We Recommend Add {recommended} Products At Least"
+            "recommended count": "We Recommend Add {recommended} Products At Least",
+            "show type": "Show Type",
+            "normal": "Normal",
+            "featured": "Featured",
+            "show type level": "Show Level"
         },
         "orders": {
             "customer name": "Customer Name",

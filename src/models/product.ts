@@ -9,6 +9,7 @@ export interface IProduct {
     price: number;
     tax: number;
     profitRatio: number;
+    showTypes: ({ showType: "featured" | "normal", level: number })[]
 }
 
 const ProductSchema = new mongoose.Schema<IProduct>({
@@ -28,6 +29,19 @@ const ProductSchema = new mongoose.Schema<IProduct>({
     description: {
         type: String,
         required: true,
+    },
+    showTypes: {
+        type: [{
+            showType: {
+                type: String,
+                required: true,
+            },
+            level: {
+                type: Number,
+                required: true
+            }
+        }],
+        default: [{ "level": 1, "showType": "normal" }],
     },
     price: {
         type: Number,
