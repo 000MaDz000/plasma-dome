@@ -113,4 +113,28 @@ ProductsRoute.post("/", DashboardLocker, multer().single("images"), async (req: 
     }
 });
 
+ProductsRoute.get("/statistics", DashboardLocker, async (req, res) => {
+    const data = {
+        normalProducts: 0,
+        featuredProducts: 0,
+        totalProducts: 0,
+    };
+    try {
+        const statisticNames: IStatisticsName[] = ["totalProducts", "normalProducts", "featuredProducts"];
+        const statistics = Statistics.find({
+            "name": {
+                $in: statisticNames,
+            }
+        }).cursor()
+
+
+        for await (let statistic of statistics) ((data as any)[statistic.name]) = statistic.count;
+
+        res.json(data);
+    }
+    catch (err) {
+        res.json(data);
+    }
+});
+
 export default ProductsRoute;

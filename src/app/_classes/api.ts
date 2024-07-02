@@ -29,6 +29,20 @@ export class ProductsApi {
         }
     }
 
+    async fetchStatistics(): Promise<{ normalProducts: number; featuredProducts: number; totalProducts: number }> {
+        try {
+
+            return await fetch("/api/products/statistics").then(r => r.json());
+        }
+        catch (err) {
+            return {
+                normalProducts: 0,
+                featuredProducts: 0,
+                totalProducts: 0,
+            }
+        }
+    }
+
 }
 
 export class OrdersApi {

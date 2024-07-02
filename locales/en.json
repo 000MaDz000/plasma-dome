@@ -46,12 +46,14 @@
             "confirm edit": "Confirm",
             "upload image": "Upload Image",
             "show more": "Show More",
-            "count": "Products Count",
+            "count": "Total Products Count",
             "recommended count": "We Recommend Add {recommended} Products At Least",
             "show type": "Show Type",
             "normal": "Normal",
             "featured": "Featured",
-            "show type level": "Show Level"
+            "show type level": "Show Level",
+            "featured count": "Featured Products Count",
+            "normal count": "Normal Products Count"
         },
         "orders": {
             "customer name": "Customer Name",
