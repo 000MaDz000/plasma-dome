@@ -57,6 +57,7 @@ const ProductSchema = new mongoose.Schema<IProduct>({
 });
 
 ProductSchema.index({ price: 1, name: 1 });
+ProductSchema.index({ categories: 1 });
 const Product = mongoose.model("product", ProductSchema) as Model<IProduct>;
 global.models.Product = Product;
 export default Product;
