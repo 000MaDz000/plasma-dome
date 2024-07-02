@@ -1,19 +1,25 @@
-import { Container, Grid, } from "@mui/material";
+import { Box, CircularProgress, Container, Grid, } from "@mui/material";
 import ProductCard from "./product-card";
 import { Product } from "../_classes/models";
+import ProductsScrollableRow from "./products-scrollable-row";
+import { Suspense } from "react";
 
 export default async function StoreBody() {
     const products = await Product.find({}).limit(20).populate("images");
 
     return (
         <Container maxWidth="xl" className="mt-5">
-            <Grid className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 grid-cols-2">
-                <>
-                    {products.map(product => (
-                        <ProductCard product={product} key={product._id.toString()} />
-                    ))}
-                </>
-            </Grid>
+            <div className="flex flex-col gap-7">
+
+                <ProductsScrollableRow products={products as any} />
+                <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 grid-cols-2">
+                    <>
+                        {products.map(product => (
+                            <ProductCard product={product as any} key={product._id.toString()} />
+                        ))}
+                    </>
+                </div>
+            </div>
         </Container>
     )
 }

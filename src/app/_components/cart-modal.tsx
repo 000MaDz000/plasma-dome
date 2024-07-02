@@ -57,7 +57,7 @@ export default function CartModal({ open, onClose }: { open: boolean, onClose: (
                     </Grid>
 
                     <div className="m-3 flex justify-between">
-                        <Button>
+                        <Button disabled={cartData.length === 0}>
                             <Link href="/orders/create">
                                 {t("confirm order")}
                             </Link>
