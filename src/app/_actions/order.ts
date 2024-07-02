@@ -2,10 +2,11 @@
 
 import { randomUUID } from "crypto";
 import session from "../_functions/session";
-import { Order } from "../_classes/models";
+import { Order, Statistics } from "../_classes/models";
 import isAdmin from "../_functions/is-admin";
 import { redirect } from "next/navigation";
 import { IOrder } from "@/models/order";
+import { IStatisticsName } from "@/models/statistics";
 
 export async function setOrderData(data: FormData) {
     const name = data.get("name");
@@ -22,6 +23,7 @@ export async function setOrderData(data: FormData) {
         name: name.toString(),
         mobile: mobile.toString(),
         verifyCode: code,
+        password: sess.data.user.password,
     }
 
     sess.save();
@@ -57,6 +59,24 @@ export async function createOrder(verifyCode: string) {
     sess.data.cart.products = [];
     sess.save();
 
+    const statisticName: IStatisticsName = "liveOrders";
+
+    await Statistics.updateOne(
+        {
+            name: statisticName,
+            "date.year": orderData.orderDate.getUTCFullYear(),
+            "date.month": orderData.orderDate.getUTCMonth() + 1,
+            "date.day": orderData.orderDate.getUTCDate(),
+        },
+        {
+            $inc: {
+                count: 1,
+            }
+        },
+        { upsert: true }
+    );
+
+
     return orderData;
 
 }
@@ -65,10 +85,21 @@ export default async function EndOrder(id: string) {
     if (!id || id.length !== 24) return 400;
     const order = await Order.findById(id);
 
-    if (!order) return 400;
+    if (!order || order.ended) return 400;
 
     order.ended = true;
     await order.save();
+
+    const endName: IStatisticsName = "endedOrders";
+
+    // increment the ended orders
+    await Statistics.updateOne({
+        name: endName,
+        "date.year": order.orderDate.getUTCFullYear(),
+        "date.month": order.orderDate.getUTCMonth() + 1,
+        "date.day": order.orderDate.getUTCDate(),
+    }, { "$inc": { count: 1 } }, { upsert: true });
+
 
     return 200;
 }
@@ -85,6 +116,16 @@ export async function CancelOrder(id: string) {
     };
 
     await order.save();
+
+    const endName: IStatisticsName = "endedOrders";
+
+    // increment the ended orders
+    await Statistics.updateOne({
+        name: endName,
+        "date.year": order.orderDate.getUTCFullYear(),
+        "date.month": order.orderDate.getUTCMonth() + 1,
+        "date.day": order.orderDate.getUTCDate(),
+    }, { "$inc": { count: 1 } }, { upsert: true });
 
     return 200;
 }

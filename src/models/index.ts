@@ -14,7 +14,7 @@ export const Image = ImageModel;
 export const Product = ProductModel;
 export const User = UserModel;
 export const Order = OrderModel;
-export const Counts = StatisticsModel;
+export const Statistics = StatisticsModel;
 
 export type UserModelType = Model<IUser>;
 export type ProductModelType = Model<IProduct>;

@@ -2,10 +2,11 @@ import { Paper, Typography } from "@mui/material";
 import { ICartProduct } from "../_actions/get-cart-data";
 import ProductCard from "./product-card";
 import ScrollLeftRightButtons from "./scroll-left-right-buttons";
+import { useId } from "react";
 type PropsType = Omit<ICartProduct, "quantity">[];
 
 export default function ProductsScrollableRow({ products, title }: { products: PropsType, title?: string }) {
-    const id = products[0]._id.toString();
+    const id = useId();
 
     return (
         <div className="relative">

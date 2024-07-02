@@ -26,7 +26,7 @@ export default function CreateOrderPage() {
                     </Paper>
 
 
-                    <RequiredOrderDataForm onOrderCreated={(o) => console.log(o)} disabled={disabled} />
+                    <RequiredOrderDataForm onOrderCreated={() => setDisabled(true)} disabled={disabled} />
                 </Box>
             </Container>
         </div>

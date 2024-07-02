@@ -3,7 +3,7 @@ import { Model, model, Schema } from "mongoose";
 const getCurrentYear = () => new Date().getUTCFullYear();
 const getCurrentMonth = () => new Date().getUTCMonth() + 1;
 const getCurrentDay = () => new Date().getUTCDate();
-type IStatisticsNames =
+export type IStatisticsName =
     "totalProducts" | // the total products count in the store
     "normalProducts" | // the normal products count in the store
     "featuredProducts" | // the total featured products in the store
@@ -16,14 +16,16 @@ type IStatisticsNames =
     "salesValue" |  // the accepted money of the sales
     "sales"; // total sales in the store
 
+export type IStatisticsDate = {
+    year: number;
+    month: number;
+    day: number;
+};
+
 export interface IStatistics {
-    name: IStatisticsNames;
+    name: IStatisticsName;
     count: number;
-    date: {
-        year: number;
-        month: number;
-        day: number;
-    };
+    date: IStatisticsDate;
 }
 
 const CountsSchema = new Schema<IStatistics>({
@@ -54,7 +56,7 @@ const CountsSchema = new Schema<IStatistics>({
 
 CountsSchema.index({ name: 1, "date.year": -1, "date.month": -1, "date.day": -1 }); // latest counts first
 
-const Statistics = model("Counts", CountsSchema) as Model<IStatistics>;
+const Statistics = model("Statistics", CountsSchema) as Model<IStatistics>;
 global.models.Statistics = Statistics;
 export default Statistics;
 

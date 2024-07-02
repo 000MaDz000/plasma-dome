@@ -1,4 +1,4 @@
-import { Product, Image } from "../../../models/";
+import { Product, Image, Statistics } from "../../../models/";
 import { Request, Response, Router } from "express";
 import { ObjectId } from "bson";
 import multer from "multer";
@@ -7,6 +7,7 @@ import { join } from "path";
 import { writeFile } from "fs/promises";
 import FilterProduct from "../../../app/_functions/filter-product";
 import { IProduct } from "@/models/product";
+import { IStatisticsName } from "@/models/statistics";
 import DashboardLocker from "../lockers/pages/dashboard";
 
 const ProductsRoute = Router();
@@ -90,7 +91,20 @@ ProductsRoute.post("/", DashboardLocker, multer().single("images"), async (req: 
             showTypes: showTypes,
         });
 
+
+        const StatisticName1: IStatisticsName = "totalProducts";
+        const StatisticName2: IStatisticsName = data.showType == "f" ? "featuredProducts" : "normalProducts";
+
+        await Statistics.updateMany({
+            name: StatisticName1,
+        }, { $inc: { count: 1 } }, { upsert: true });
+
+        await Statistics.updateMany({
+            name: StatisticName2,
+        }, { $inc: { count: 1 } }, { upsert: true });
+
         await saveProduct.save();
+
         res.sendStatus(200);
     }
     catch (err) {
