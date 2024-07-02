@@ -21,13 +21,13 @@ export default async function ProductCard({ isAddedToCart, product }: { isAddedT
                         <Typography className=" [&>span]:text-green-800" variant="subtitle1"> <span className="line-clamp-2">{product.name}</span></Typography>
                     </CardContent>
                 </Box>
-
-
-                <CardActions className="flex flex-col cursor-auto">
-                    <Typography color={"green"} >{product.price} EGP</Typography>
-                    <AddToCartButton productId={product._id.toString()} />
-                </CardActions>
             </Link>
+
+
+            <CardActions className="flex flex-col cursor-auto">
+                <Typography color={"green"} >{product.price} EGP</Typography>
+                <AddToCartButton productId={product._id.toString()} />
+            </CardActions>
         </Card>
     )
 }

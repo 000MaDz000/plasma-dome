@@ -91,14 +91,73 @@ export default async function EndOrder(id: string) {
     await order.save();
 
     const endName: IStatisticsName = "endedOrders";
+    const salesName: IStatisticsName = "sales"; // the sales count
+    const salesValue: IStatisticsName = "salesValue"; // the sales value
+    const totalSalesValue: IStatisticsName = "totalSalesValue"; // the total sales count
+
+    // build the date query data
+    const ordersDateQueryData = {
+        "date.year": order.orderDate.getUTCFullYear(),
+        "date.month": order.orderDate.getUTCMonth() + 1,
+        "date.day": order.orderDate.getUTCDate(),
+    }
 
     // increment the ended orders
     await Statistics.updateOne({
         name: endName,
-        "date.year": order.orderDate.getUTCFullYear(),
-        "date.month": order.orderDate.getUTCMonth() + 1,
-        "date.day": order.orderDate.getUTCDate(),
+        ...ordersDateQueryData
     }, { "$inc": { count: 1 } }, { upsert: true });
+
+
+
+    // build the date query data
+    const date = new Date();
+    const salesDateQueryData = {
+        "date.year": date.getUTCFullYear(),
+        "date.month": date.getUTCMonth() + 1,
+        "date.day": date.getUTCDate(),
+    }
+
+
+    // increment the sales count
+    await Statistics.updateOne(
+        {
+            name: salesName,
+            ...salesDateQueryData
+        },
+        { $inc: { count: 1 } },
+        { upsert: true }
+    );
+
+
+    // increment sales count and total sales count
+    await Statistics.updateOne(
+        {
+            name: salesValue,
+            ...salesDateQueryData
+        },
+        {
+            $inc: {
+                count: order.totalPrice,
+            }
+        },
+        { upsert: true }
+    );
+
+    // total sales count is a counter started from the app start to unknown time
+    // it's counts all sales values on the website
+    // so, we will not add the date query
+    await Statistics.updateOne(
+        {
+            name: totalSalesValue,
+        },
+        {
+            $inc: {
+                count: order.totalPrice,
+            }
+        },
+        { upsert: true }
+    );
 
 
     return 200;
