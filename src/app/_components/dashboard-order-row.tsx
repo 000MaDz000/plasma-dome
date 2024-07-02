@@ -28,7 +28,7 @@ export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled }
                 <TableCell align="center">{order.customerPhone}</TableCell>
                 <TableCell align="center">{order.deleveryAddress || "-"}</TableCell>
                 <TableCell align="center">{order.orderDate.toString()}</TableCell>
-                <TableCell align="center">{order.ended ? t("ended") : order.cancled?.status ? t("cancled") : t("pending")}</TableCell>
+                <TableCell align="center">{order.ended ? t("ended") : order.cancled?.status ? t("canceled") : t("pending")}</TableCell>
                 <TableCell align="center">{t("egp", { price: order.totalPrice })}</TableCell>
                 <TableCell>
                     <IconButton onClick={() => setDetails(!details)}>

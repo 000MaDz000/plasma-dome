@@ -36,7 +36,7 @@ export default function ProductsTable({ products }: { products?: ICartProduct[] 
                 </TableHead>
 
                 <TableBody>
-                    {data.map((p) => <ProductsTableRow product={p} />)}
+                    {data.map((p) => <ProductsTableRow product={p} key={p._id} />)}
 
                 </TableBody>
             </Table>

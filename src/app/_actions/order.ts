@@ -60,13 +60,18 @@ export async function createOrder(verifyCode: string) {
     sess.save();
 
     const statisticName: IStatisticsName = "liveOrders";
+    const totalName: IStatisticsName = "totalOrders";
+
+    const orderDateQuery = {
+        "date.year": orderData.orderDate.getUTCFullYear(),
+        "date.month": orderData.orderDate.getUTCMonth() + 1,
+        "date.day": orderData.orderDate.getUTCDate(),
+    }
 
     await Statistics.updateOne(
         {
             name: statisticName,
-            "date.year": orderData.orderDate.getUTCFullYear(),
-            "date.month": orderData.orderDate.getUTCMonth() + 1,
-            "date.day": orderData.orderDate.getUTCDate(),
+            ...orderDateQuery,
         },
         {
             $inc: {
@@ -75,6 +80,20 @@ export async function createOrder(verifyCode: string) {
         },
         { upsert: true }
     );
+
+    await Statistics.updateOne(
+        {
+            name: totalName,
+            "date.year": orderDateQuery["date.year"],
+            "date.month": 99999,
+            "date.day": 99999,
+        },
+        {
+            $inc: {
+                count: 1,
+            }
+        }
+    )
 
 
     return orderData;
@@ -175,15 +194,28 @@ export async function CancelOrder(id: string) {
     };
 
     await order.save();
+    const orderDateQuery = {
+        "date.year": order.orderDate.getUTCFullYear(),
+        "date.month": order.orderDate.getUTCMonth() + 1,
+        "date.day": order.orderDate.getUTCDate(),
+    }
+    const liveName: IStatisticsName = "liveOrders";
+    const endName: IStatisticsName = "canceledOrders";
 
-    const endName: IStatisticsName = "endedOrders";
+    await Statistics.updateOne(
+        {
+            name: liveName,
+            ...orderDateQuery,
+        },
+        {
+            $inc: { "count": -1 }
+        }
+    );
 
     // increment the ended orders
     await Statistics.updateOne({
         name: endName,
-        "date.year": order.orderDate.getUTCFullYear(),
-        "date.month": order.orderDate.getUTCMonth() + 1,
-        "date.day": order.orderDate.getUTCDate(),
+        ...orderDateQuery
     }, { "$inc": { count: 1 } }, { upsert: true });
 
     return 200;

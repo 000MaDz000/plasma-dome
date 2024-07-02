@@ -9,7 +9,8 @@ export type IStatisticsName =
     "featuredProducts" | // the total featured products in the store
     "totalOrders" | // the total orders in the store
     "liveOrders" | // orders that's not ended yet
-    "endedOrders" | // orders that's already ended
+    "endedOrders" |
+    "canceledOrders" | // orders that's already ended
     "customers" | // the customers count
     "images" | // the images count
     "totalSalesValue" | // the total sales value represents the total money that's accepted
@@ -22,8 +23,8 @@ export type IStatisticsDate = {
     day: number;
 };
 
-export interface IStatistics {
-    name: IStatisticsName;
+export interface IStatistics<T = IStatisticsName> {
+    name: T;
     count: number;
     date: IStatisticsDate;
 }

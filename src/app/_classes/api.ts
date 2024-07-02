@@ -1,5 +1,6 @@
 import { IOrder } from "@/models/order";
 import { ICartProduct } from "../_actions/get-cart-data";
+import { IStatistics } from "@/models/statistics";
 
 export class ProductsApi {
     private lastFetchId: string | null;
@@ -45,6 +46,16 @@ export class OrdersApi {
 
 
             return orders;
+        }
+        catch (err) {
+            return [];
+        }
+    }
+
+    async fetchStatistics(year?: number) {
+        try {
+            const statistics = await fetch(`/api/dashboard/orders/statistics/?${year ? ("year=" + year) : ""}`).then(r => r.json()) as IStatistics<"endedOrders">[];
+            return statistics;
         }
         catch (err) {
             return [];

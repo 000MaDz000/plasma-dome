@@ -16,6 +16,7 @@
     "Dashboard": {
         "home": {
             "summary sales": "Summary Sales",
+            "summary success orders": "Summary Success Orders",
             "last orders": "Last Orders",
             "products": "Products"
         },
@@ -61,7 +62,7 @@
             "total price": "total price",
             "pending": "Pending",
             "ended": "Ended",
-            "cancled": "Cancled",
+            "canceled": "Canceled",
             "egp": "{price} EGP",
             "no data": "There Is No Orders Yet !",
             "orders count": "Available Orders {count}",
@@ -70,7 +71,28 @@
             "ended confirm": "Mark As Ended",
             "cancel order": "Cancel The Order",
             "is ended": "Are The Order Ended ?",
-            "mark as ended alert": "When You Click On this Button, The Order Will Be Ended"
+            "mark as ended alert": "When You Click On this Button, The Order Will Be Ended",
+            "count": "Orders Count",
+            "chart": {
+                "success orders": "Success Orders",
+                "canceled orders": "Canceled Orders",
+                "live orders": "Pending Orders",
+                "total orders": "Total Orders {ordersCount}"
+            },
+            "months": {
+                "1": "January",
+                "2": "February",
+                "3": "March",
+                "4": "April",
+                "5": "May",
+                "6": "June",
+                "7": "July",
+                "8": "August",
+                "9": "September",
+                "10": "October",
+                "11": "November",
+                "12": "December"
+            }
         }
     },
     "Store": {

@@ -21,7 +21,7 @@ export default async function DashboardHome() {
                     </Paper>
 
                     <Paper>
-                        <Typography variant="h6" marginTop={1} marginLeft={1}>{t("summary sales")}</Typography>
+                        <Typography variant="h6" marginTop={1} marginLeft={1}>{t("summary success orders")}</Typography>
                         <DashboardOrdersChart />
                     </Paper>
 
