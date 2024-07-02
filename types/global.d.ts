@@ -1,5 +1,5 @@
 import MongoStore from "connect-mongo";
-import { GhostModelType, ImageModelType, InvoiceModelType, ProductModelType, UserModelType } from "../src/models/index"
+import { StatisticsModelType, GhostModelType, ImageModelType, InvoiceModelType, ProductModelType, UserModelType } from "../src/models/index"
 import { ICartProduct } from "@/app/_actions/get-cart-data";
 import { OrderModelType } from "@/models/order";
 declare global {
@@ -10,6 +10,7 @@ declare global {
         Image?: ImageModelType;
         Ghost?: GhostModelType;
         Order?: OrderModelType;
+        Statistics?: StatisticsModelType;
     },
 
     var appSessions: MongoStore
