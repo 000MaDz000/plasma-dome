@@ -113,6 +113,7 @@ export default async function EndOrder(id: string) {
     const salesName: IStatisticsName = "sales"; // the sales count
     const salesValue: IStatisticsName = "salesValue"; // the sales value
     const totalSalesValue: IStatisticsName = "totalSalesValue"; // the total sales count
+    const liveName: IStatisticsName = "liveOrders";
 
     // build the date query data
     const ordersDateQueryData = {
@@ -120,6 +121,18 @@ export default async function EndOrder(id: string) {
         "date.month": order.orderDate.getUTCMonth() + 1,
         "date.day": order.orderDate.getUTCDate(),
     }
+
+    // decrement the live orders
+
+    await Statistics.updateOne(
+        {
+            name: liveName,
+            ...ordersDateQueryData,
+        },
+        {
+            $inc: { "count": -1 }
+        }
+    );
 
     // increment the ended orders
     await Statistics.updateOne({
