@@ -25,9 +25,9 @@ export default function DashboardSidebarContent() {
                 <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("products")}</Typography>
             </Link>
 
-            <Link href="/dashboard/customers" className="hover:bg-white hover:shadow-md transition-all">
+            <Link href="/dashboard/users" className="hover:bg-white hover:shadow-md transition-all">
                 <FaUsers />
-                <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("customers")}</Typography>
+                <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("users")}</Typography>
             </Link>
 
 

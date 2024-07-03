@@ -24,7 +24,7 @@
             "home": "Home",
             "orders": "Orders",
             "products": "Products",
-            "customers": "customers"
+            "users": "Users"
         },
         "header": {
             "notifications": "Notifications",
@@ -97,8 +97,10 @@
         "sales": {
             "chart label": "Sales Values"
         },
-        "customers": {
-            "page title": "Customers Informations",
+        "users": {
+            "customer title": "Customers",
+            "admin title": "Admins",
+            "employee title": "Employees",
             "table": {
                 "name": "Name",
                 "phone": "Phone Number",
@@ -108,7 +110,14 @@
                     "admin": "Admin",
                     "customer": "Customer",
                     "employee": "Employee"
-                }
+                },
+                "options title": "Give And Remove User Roles",
+                "no data": "No Data Found",
+                "show more": "Show More",
+                "mark as admin": "Set As Administrator",
+                "mark as employee": "Set As Employee",
+                "remove admin role": "Remove Admin Role",
+                "remove employee role": "Remove Employee Role"
             }
         }
     },

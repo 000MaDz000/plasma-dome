@@ -1,71 +1,64 @@
 'use client';
 
 import { IUser } from "@/models/user";
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
-import { Users } from "../_classes/api";
+import { Button, Skeleton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { useContext, useEffect, useMemo, useState } from "react";
+import Users from "../_contexts/users";
 import { useTranslations } from "next-intl";
-import { FaUser } from "react-icons/fa";
+import UsersTableRow from "./users-table-row";
+type DragElementData = {
+    name: string;
+    phone: string;
+    country: string;
+    role: string;
+}
 
-export default function UsersTable({ role }: { role?: "admin" | "customers" | "employee" }) {
-    const [customers, setCustomers] = useState<IUser[]>([]);
-    const api = useMemo(() => new Users(), []);
-    const t = useTranslations("Dashboard.customers.table");
+export default function UsersTable({ role }: { role: "admins" | "customers" | "employees" }) {
+    const data = useContext(Users)[role];
+    const users = data.data;
+    const { increase, replaceRole } = data;
+    const t = useTranslations("Dashboard.users.table");
+    const [pending, setPending] = useState(true);
+
 
     useEffect(() => {
-        switch (role) {
-            case "customers":
-                api.fetchCustomers().then(setCustomers);
-                break;
-            case "admin":
-                break;
-
-            case "employee":
-                break;
-
-        }
-    }, []);
+        if (!pending) return;
+        increase();
+        setPending(false);
+    }, [pending]);
 
     return (
-        <Table>
-            <TableHead>
-                <TableRow>
-                    <TableCell align="center"></TableCell>
-                    <TableCell align="center">{t("name")}</TableCell>
-                    <TableCell align="center">{t("phone")}</TableCell>
-                    <TableCell align="center">{t("country")}</TableCell>
-                    <TableCell align="center">{t("role")}</TableCell>
-                </TableRow>
-            </TableHead>
+        <>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell align="center"></TableCell>
+                        <TableCell align="center">{t("name")}</TableCell>
+                        <TableCell align="center">{t("phone")}</TableCell>
+                        <TableCell align="center">{t("country")}</TableCell>
+                        <TableCell align="center">{t("role")}</TableCell>
+                    </TableRow>
+                </TableHead>
 
-            <TableBody>
-                {
-                    customers.map(customer => {
-                        let permission = "customer";
+                <TableBody >
+                    {
+                        users.map(user => <UsersTableRow user={user} key={(user as any)._id} replaceRole={replaceRole as any} />)
+                    }
+                </TableBody>
 
-                        for (let p of customer.permissions) {
-                            if (p.name == "admin") {
-                                permission = "admin";
-                            }
-                            else if (p.name == "employee" && permission !== "admin") {
-                                permission = "employee";
-                            }
-                        }
+            </Table>
+            {pending && (
+                <>
+                    <Skeleton className="p-3" />
+                    <Skeleton className="p-3" />
+                    <Skeleton className="p-3" />
+                </>
+            )}
 
-                        return (
-                            <TableRow hover>
-                                <TableCell align="center">
-                                    <FaUser size={"2rem"} />
-                                </TableCell>
-                                <TableCell align="center">{customer.name}</TableCell>
-                                <TableCell align="center">{customer.mobile}</TableCell>
-                                <TableCell align="center">{(customer as any).country ? (customer as any).country : "unkown"}</TableCell>
-                                <TableCell align="center">{t("permissions." + permission)}</TableCell>
-                            </TableRow>
-                        )
-                    })
-                }
-            </TableBody>
-        </Table>
+            {
+                (!pending && !users.length) && <Typography variant="h6" textAlign={"center"} margin={7}>{t("no data")}</Typography>
+            }
+            <Button className="m-9" fullWidth onClick={() => setPending(true)} disabled={!pending && !users.length}>{t("show more")}</Button>
+        </>
     )
 }

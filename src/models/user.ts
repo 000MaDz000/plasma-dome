@@ -1,5 +1,7 @@
 import mongoose, { Model } from "mongoose";
 
+export type UserPermissionName = "customer" | "admin" | "employee";
+
 export interface IUser {
     name: string;
     password?: string,

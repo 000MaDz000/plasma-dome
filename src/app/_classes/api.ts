@@ -57,7 +57,7 @@ export class OrdersApi {
     async fetchOrders({ month, ended }: Partial<{ month: number, ended: boolean }> = {}) {
         try {
 
-            let orders = await fetch(`/api/dashboard/orders/?${this.lastFetchId ? `/?lastId=${this.lastFetchId}&` : ""}${month ? `month=${month}&` : ""}${ended ? "ended=true" : ""}`).then(res => res.json()) as IOrder[];
+            const orders = await fetch(`/api/dashboard/orders/?${this.lastFetchId ? `/?lastId=${this.lastFetchId}&` : ""}${month ? `month=${month}&` : ""}${ended ? "ended=true" : ""}`).then(res => res.json()) as IOrder[];
             this.lastFetchId = orders[orders.length - 1]._id;
 
 
@@ -91,13 +91,73 @@ export class OrdersApi {
 
 export class Users {
     private lastCustomerId: string | null;
+    private lastEmployeeId: string | null;
+    private lastAdminId: string | null;
 
     constructor() {
         this.lastCustomerId = null;
+        this.lastEmployeeId = null;
+        this.lastAdminId = null;
     }
 
     async fetchCustomers() {
-        let orders = await fetch(`/api/dashboard/users/customers?${this.lastCustomerId ? `/?lastId=${this.lastCustomerId}&` : ""}`).then(res => res.json()) as IUser[];
-        return orders
+        try {
+            const customers = await fetch(`/api/dashboard/users/customers?${this.lastCustomerId ? `lastId=${this.lastCustomerId}&` : ""}`).then(res => res.json()) as IUser[];
+            if (customers.length) {
+                this.lastCustomerId = (customers[customers.length - 1] as any)._id as string;
+            }
+
+            return customers;
+        }
+        catch (err) {
+            return []
+        }
     }
+
+    async fetchEmployees() {
+        try {
+            const employees = await fetch(`/api/dashboard/users/employees?${this.lastEmployeeId ? `lastId=${this.lastEmployeeId}&` : ""}`).then(res => res.json()) as IUser[];
+            if (employees.length) {
+                this.lastEmployeeId = (employees[employees.length - 1] as any)._id as string;
+            }
+            return employees;
+        }
+        catch (err) {
+            return []
+        }
+    }
+
+    async fetchAdmins() {
+        try {
+            const admins = await fetch(`/api/dashboard/users/admins?${this.lastAdminId ? `lastId=${this.lastAdminId}&` : ""}`).then(res => res.json()) as IUser[];
+            if (admins.length) {
+                this.lastAdminId = (admins[admins.length - 1] as any)._id as string;
+            }
+            return admins;
+        }
+        catch (err) {
+            return []
+        }
+    }
+
+    async updateAdminRole(userId: string, role: "role" | "unrole") {
+        try {
+            const res = await fetch(`/api/dashboard/users/admins?userId=${userId}&role=${role}`, { method: "put" });
+            return res.status;
+        }
+        catch (err) {
+            return 400;
+        }
+    }
+
+    async updateEmployeeRole(userId: string, role: "role" | "unrole") {
+        try {
+            const res = await fetch(`/api/dashboard/users/employees?userId=${userId}&role=${role}`, { method: "put" });
+            return res.status;
+        }
+        catch (err) {
+            return 400;
+        }
+    }
+
 }
