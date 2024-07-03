@@ -2,7 +2,7 @@
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FaCog, FaDollarSign, FaHome, FaProductHunt } from "react-icons/fa";
+import { FaCog, FaDollarSign, FaHome, FaProductHunt, FaUsers } from "react-icons/fa";
 import { FaBagShopping, FaMessage } from "react-icons/fa6";
 
 export default function DashboardSidebarContent() {
@@ -25,20 +25,11 @@ export default function DashboardSidebarContent() {
                 <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("products")}</Typography>
             </Link>
 
-            <Link href="/dashboard/payments" className="hover:bg-white hover:shadow-md transition-all">
-                <FaDollarSign />
-                <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("payments")}</Typography>
+            <Link href="/dashboard/customers" className="hover:bg-white hover:shadow-md transition-all">
+                <FaUsers />
+                <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("customers")}</Typography>
             </Link>
 
-            <Link href="/dashboard/reports" className="hover:bg-white hover:shadow-md transition-all">
-                <FaMessage />
-                <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("reports")}</Typography>
-            </Link>
-
-            <Link href="/dashboard/settings" className="hover:bg-white hover:shadow-md hover:border-border-black border border-transparent transition-all">
-                <FaCog />
-                <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("settings")}</Typography>
-            </Link>
 
         </div>
     )

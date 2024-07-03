@@ -24,9 +24,7 @@
             "home": "Home",
             "orders": "Orders",
             "products": "Products",
-            "payments": "Payments",
-            "reports": "Reports",
-            "settings": "Settings"
+            "customers": "customers"
         },
         "header": {
             "notifications": "Notifications",
@@ -98,6 +96,20 @@
         },
         "sales": {
             "chart label": "Sales Values"
+        },
+        "customers": {
+            "page title": "Customers Informations",
+            "table": {
+                "name": "Name",
+                "phone": "Phone Number",
+                "role": "Role",
+                "country": "Country",
+                "permissions": {
+                    "admin": "Admin",
+                    "customer": "Customer",
+                    "employee": "Employee"
+                }
+            }
         }
     },
     "Store": {

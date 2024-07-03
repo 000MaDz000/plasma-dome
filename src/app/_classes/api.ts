@@ -1,6 +1,8 @@
 import { IOrder } from "@/models/order";
 import { ICartProduct } from "../_actions/get-cart-data";
 import { IStatistics } from "@/models/statistics";
+import { IUser } from "@/models/user";
+
 
 export class ProductsApi {
     private lastFetchId: string | null;
@@ -84,5 +86,18 @@ export class OrdersApi {
         catch (err) {
             return []
         }
+    }
+}
+
+export class Users {
+    private lastCustomerId: string | null;
+
+    constructor() {
+        this.lastCustomerId = null;
+    }
+
+    async fetchCustomers() {
+        let orders = await fetch(`/api/dashboard/users/customers?${this.lastCustomerId ? `/?lastId=${this.lastCustomerId}&` : ""}`).then(res => res.json()) as IUser[];
+        return orders
     }
 }
