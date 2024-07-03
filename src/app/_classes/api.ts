@@ -75,4 +75,14 @@ export class OrdersApi {
             return [];
         }
     }
+
+    static async getSalesStatistics() {
+        try {
+            const data = await fetch("/api/dashboard/sales/statistics/values").then(r => r.json());
+            return data;
+        }
+        catch (err) {
+            return []
+        }
+    }
 }

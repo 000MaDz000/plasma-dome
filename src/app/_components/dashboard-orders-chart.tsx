@@ -61,11 +61,11 @@ export default function DashboardOrdersChart() {
 
         for (let statistic of statistics) {
             const key = statistic.name;
-            if (key in dataStructure) {
-                (dataStructure[key] as IStatistics[])[statistic.date.month - 1].count += statistic.count;
-            }
-            else if (key == "totalOrders") {
+            if (key == "totalOrders") {
                 (dataStructure.totalOrders as number) += statistic.count;
+            }
+            else if (key in dataStructure) {
+                (dataStructure[key] as IStatistics[])[statistic.date.month - 1].count += statistic.count;
             }
         };
 
@@ -75,6 +75,7 @@ export default function DashboardOrdersChart() {
     useEffect(() => {
         api.fetchStatistics().then(setStatistics);
     }, []);
+    console.log(statistics);
 
     return (
         statistics.length ?

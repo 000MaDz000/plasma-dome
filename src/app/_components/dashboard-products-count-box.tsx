@@ -7,7 +7,6 @@ import ProductsStatistics from "@/app/_contexts/products-statistics";
 export default function ProductsCountBox() {
     const t = useTranslations("Dashboard.products");
     const statistics = useContext(ProductsStatistics);
-    console.log(statistics);
 
 
     return (

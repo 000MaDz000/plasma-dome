@@ -1,4 +1,5 @@
 import { getOrdersCounts } from "@/app/_actions/get-orders-count";
+import DashboardOrdersChart from "@/app/_components/dashboard-orders-chart";
 import DashboardOrdersTable from "@/app/_components/dashboard-orders-table";
 import { Box, Card, CardContent, Container, Paper } from "@mui/material";
 import { getTranslations } from "next-intl/server";
@@ -24,6 +25,10 @@ export default async function DashboardOrdersPage() {
                         <Card>
                             <CardContent className="bg-orange-50 text-orange-500">{t("pending orders count", { count: counts.pending })}</CardContent>
                         </Card>
+                    </Paper>
+
+                    <Paper>
+                        <DashboardOrdersChart />
                     </Paper>
 
                     <Paper className="overflow-x-auto p-7 text-nowrap">

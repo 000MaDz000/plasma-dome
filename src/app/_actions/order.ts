@@ -92,7 +92,8 @@ export async function createOrder(verifyCode: string) {
             $inc: {
                 count: 1,
             }
-        }
+        },
+        { upsert: true }
     )
 
 
