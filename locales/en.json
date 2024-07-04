@@ -133,7 +133,11 @@
             "not active": "Not Active",
             "no data": "No Data Found",
             "submit create": "Create The Ad",
-            "upload images": "Upload Images"
+            "upload images": "Upload Images",
+            "save changes": "Save",
+            "delete": "Delete",
+            "save tooltip": "Save Advertisment Status To {value}",
+            "delete tooltip": "Delete The Advertisment Banner"
         }
     },
     "Store": {

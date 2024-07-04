@@ -5,6 +5,7 @@ import { Skeleton, Table, TableRow, TableHead, TableCell, TableBody, Typography 
 import { useEffect, useState } from "react";
 import { AdvertismentApi } from "../_classes/api";
 import { useTranslations } from "next-intl";
+import DashboardAdRow from "./dashboard-ad-row";
 
 export default function DashboardAdsTable() {
     const [ads, setAds] = useState<(Omit<IAdvertisment, "images"> & { images: string[] })[]>([]);
@@ -17,6 +18,18 @@ export default function DashboardAdsTable() {
             setPending(false);
         });
     }, []);
+
+    const deleteAd = (ad: typeof ads[0]) => {
+        const api = new AdvertismentApi((ad as any)._id);
+        api.delete().then((status) => {
+            if ((status as any) === 200) {
+                setAds(ads.filter((val) => (val as any)._id !== (ad as any)._id));
+            }
+            else {
+                // will create an error (coming soon)
+            }
+        });
+    }
 
     return (
         pending ? <Skeleton className="h-96" /> :
@@ -33,21 +46,7 @@ export default function DashboardAdsTable() {
                     </TableHead>
 
                     <TableBody>
-                        {ads.map((ad) => {
-                            ad.createdAt = new Date(ad.createdAt);
-
-                            return (
-                                <TableRow>
-                                    <TableCell>
-                                        <img src={"/images/" + ad.images[0].slice(0, ad.images[0].lastIndexOf("."))} alt="" className="max-w-60" />
-                                    </TableCell>
-                                    <TableCell>{ad.createdAt.getFullYear()}/{ad.createdAt.getMonth() + 1}/{ad.createdAt.getDate()}</TableCell>
-                                    <TableCell>{ad.barName}</TableCell>
-                                    <TableCell>{ad.link}</TableCell>
-                                    <TableCell>{ad.active ? t("active") : t("not active")}</TableCell>
-                                </TableRow>
-                            )
-                        })}
+                        {ads.map((ad) => <DashboardAdRow key={(ad as any)._id} ad={ad} onChangeStatus={() => { }} onDeleteAd={() => deleteAd(ad)} />)}
                     </TableBody>
                 </Table>
 

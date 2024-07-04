@@ -163,7 +163,18 @@ export class Users {
 }
 
 export class AdvertismentApi {
-    constructor() { }
+    constructor(public adId: string) { }
+
+    async delete() {
+        const res = await fetch(`/api/dashboard/ads/${this.adId}`, { method: "delete" });
+        return res.status;
+    }
+
+    async setStatus(newStatus: boolean) {
+        const res = await fetch(`/api/dashboard/ads/${this.adId}/${newStatus}`, { method: "put" });
+        return res.status;
+    }
+
 
     static async getAll() {
         try {
