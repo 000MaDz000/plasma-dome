@@ -6,6 +6,7 @@ export interface IAdvertisment {
     link: string;
     images: Schema.Types.ObjectId[],
     createdAt: Date,
+    active: boolean;
 }
 
 export interface IPopulatedAdvertisments extends Omit<IAdvertisment, "images"> {
@@ -20,7 +21,10 @@ const AdvertismentSchema = new Schema<IAdvertisment>({
         type: [{ type: Schema.Types.ObjectId }],
         required: true,
     },
-
+    active: {
+        type: Boolean,
+        default: false,
+    },
 
     createdAt: {
         type: Date,
