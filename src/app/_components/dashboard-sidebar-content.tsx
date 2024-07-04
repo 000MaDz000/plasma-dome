@@ -2,8 +2,8 @@
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FaCog, FaDollarSign, FaHome, FaProductHunt, FaUsers } from "react-icons/fa";
-import { FaBagShopping, FaMessage } from "react-icons/fa6";
+import { FaAd, FaHome, FaProductHunt, FaUsers } from "react-icons/fa";
+import { FaBagShopping, } from "react-icons/fa6";
 
 export default function DashboardSidebarContent() {
     const t = useTranslations("Dashboard.links");
@@ -23,6 +23,11 @@ export default function DashboardSidebarContent() {
             <Link href="/dashboard/products" className="hover:bg-white hover:shadow-md transition-all">
                 <FaProductHunt />
                 <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("products")}</Typography>
+            </Link>
+
+            <Link href="/dashboard/ads" className="hover:bg-white hover:shadow-md transition-all">
+                <FaAd />
+                <Typography variant="subtitle1" margin={"0px"} padding={"0px"}>{t("ads")}</Typography>
             </Link>
 
             <Link href="/dashboard/users" className="hover:bg-white hover:shadow-md transition-all">

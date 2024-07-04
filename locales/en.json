@@ -24,7 +24,8 @@
             "home": "Home",
             "orders": "Orders",
             "products": "Products",
-            "users": "Users"
+            "users": "Users",
+            "ads": "advertisements"
         },
         "header": {
             "notifications": "Notifications",
