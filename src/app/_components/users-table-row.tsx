@@ -1,7 +1,7 @@
 'use client';
 
 import { IUser, UserPermissionName } from "@/models/user";
-import { Box, Button, TableCell, TableRow, Typography } from "@mui/material";
+import { Alert, Box, Button, Snackbar, TableCell, TableRow, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { FaUserCircle } from "react-icons/fa";
 import getUserRole from "../_functions/get-user-role";
@@ -10,7 +10,8 @@ import Modal from "./modal";
 
 export default function UsersTableRow({ user, replaceRole }: { user: IUser, replaceRole: (user: IUser, role: UserPermissionName) => void }) {
     const t = useTranslations("Dashboard.users.table");
-    const [modal, setModal] = useState(false)
+    const [modal, setModal] = useState(false);
+    const [snackbar, setSnackbar] = useState(false);
     const permission = getUserRole(user);
     const isRootAdmin = useMemo(() => {
         if (permission !== "admin") return false;
@@ -26,7 +27,7 @@ export default function UsersTableRow({ user, replaceRole }: { user: IUser, repl
 
     return (
         <>
-            <TableRow hover onClick={() => isRootAdmin ? "" : setModal(true)} className="cursor-pointer">
+            <TableRow hover onClick={() => isRootAdmin ? setSnackbar(true) : setModal(true)} className="cursor-pointer">
                 <TableCell align="center">
                     <FaUserCircle size="2rem" />
                 </TableCell>
@@ -68,6 +69,16 @@ export default function UsersTableRow({ user, replaceRole }: { user: IUser, repl
 
                         </Box>
                     </Modal>
+                )
+            }
+
+            {
+                snackbar && (
+                    <Snackbar open autoHideDuration={2500} onClose={() => setSnackbar(false)}>
+                        <Alert severity="error">
+                            {t("permissions.root admin error")}
+                        </Alert>
+                    </Snackbar>
                 )
             }
         </>

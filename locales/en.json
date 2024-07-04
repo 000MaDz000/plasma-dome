@@ -109,7 +109,8 @@
                 "permissions": {
                     "admin": "Admin",
                     "customer": "Customer",
-                    "employee": "Employee"
+                    "employee": "Employee",
+                    "root admin error": "Cannot Edit Main Account Permissions"
                 },
                 "options title": "Give And Remove User Roles",
                 "no data": "No Data Found",
