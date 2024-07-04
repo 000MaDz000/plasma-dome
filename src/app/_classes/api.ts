@@ -161,3 +161,16 @@ export class Users {
     }
 
 }
+
+export class AdvertismentApi {
+    constructor() { }
+
+    static async getAll() {
+        try {
+            return await fetch("/api/dashboard/ads/").then(r => r.json());
+        }
+        catch (err) {
+            return [];
+        }
+    }
+}

@@ -121,6 +121,19 @@
                 "remove admin role": "Remove Admin Role",
                 "remove employee role": "Remove Employee Role"
             }
+        },
+        "ads": {
+            "create ad": "create New Advertisment",
+            "available ads": "Advertisments",
+            "creation date": "Creation Date",
+            "barname": "Bar Name",
+            "redirect link": "Redirect Link",
+            "status": "Status",
+            "active": "Active",
+            "not active": "Not Active",
+            "no data": "No Data Found",
+            "submit create": "Create The Ad",
+            "upload images": "Upload Images"
         }
     },
     "Store": {

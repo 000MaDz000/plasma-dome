@@ -80,7 +80,7 @@ AdsRoute.get("/", async (req: Request<{}, {}, {}, { active: string | boolean | u
         // return only images urls in the images field
         res.json(
             resData.map((val) => ({
-                ...val,
+                ...(val as any).toObject(),
                 images: val.images.map(img => img.relativeUrl)
             }))
         );
