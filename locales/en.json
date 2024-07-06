@@ -25,7 +25,8 @@
             "orders": "Orders",
             "products": "Products",
             "users": "Users",
-            "ads": "advertisements"
+            "ads": "advertisements",
+            "recommendations": "Recommendations"
         },
         "header": {
             "notifications": "Notifications",
@@ -138,6 +139,21 @@
             "delete": "Delete",
             "save tooltip": "Save Advertisment Status To {value}",
             "delete tooltip": "Delete The Advertisment Banner"
+        },
+        "recommendations": {
+            "id": "id",
+            "category": "Category",
+            "categories": "Categories",
+            "recommended categories": "Recommended Categories",
+            "no recommended categories": "There is No Recommended Categories Yet !",
+            "no categories": "There is no Categories defined Yet !",
+            "confirm": "Confirm",
+            "errors": {
+                "no category provided": "Please Enter The Category Name",
+                "already exists": "The Category is Already Added",
+                "permission denied": "You Don`t Have This Permission",
+                "not exists": "The Category is Not Exists"
+            }
         }
     },
     "Store": {
