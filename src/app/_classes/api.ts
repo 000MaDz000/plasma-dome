@@ -12,8 +12,6 @@ export class ProductsApi {
 
     async fetchProducts() {
         if (this.lastFetchId) {
-            console.log(this.lastFetchId);
-
             return await fetch("/api/products/?lastId=" + this.lastFetchId)
                 .then(res => res.json())
                 .then((val: ICartProduct[]) => {
@@ -45,6 +43,26 @@ export class ProductsApi {
         }
     }
 
+    async updateCategories(productId: string, categories: string[]) {
+        try {
+            const body = {
+                categories: categories.join(",")
+            }
+
+            const res = await fetch("/api/products/" + productId, {
+                method: "put",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            return res.status;
+        }
+        catch (err) {
+            return 400
+        }
+    }
 }
 
 export class OrdersApi {

@@ -148,4 +148,26 @@ ProductsRoute.get("/statistics", DashboardLocker, async (req, res) => {
     }
 });
 
+ProductsRoute.put("/:productId", DashboardLocker, async (req: Request<{ productId: string }, {}, { categories: string }>, res) => {
+    try {
+        // 24 is ObjectId hex characters length
+        if (!req.params.productId || req.params.productId.length !== 24) return res.sendStatus(404);
+        if (!req.body?.categories) return res.sendStatus(400);
+        const product = await Product.findById(req.params.productId);
+        if (!product) return res.sendStatus(404);
+
+        const splited = req.body.categories.split(",").map(category => category.trim());
+
+        product.categories = splited;
+        await product.save();
+
+        res.sendStatus(200);
+    }
+    catch (err) {
+        console.log(err);
+
+        res.sendStatus(500);
+    }
+});
+
 export default ProductsRoute;

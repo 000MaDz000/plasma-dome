@@ -46,7 +46,7 @@ export default function ProductsTable({ products, systemCategories }: { products
                 </TableHead>
 
                 <TableBody>
-                    {data.map((p) => <ProductsTableRow product={p} key={p._id} systemCategories={categories || []} />)}
+                    {data.map((p) => <ProductsTableRow product={p} key={p._id} systemCategories={categories || []} api={api} />)}
 
                 </TableBody>
             </Table>
