@@ -15,7 +15,7 @@ export default function productsTableRow({ product }: { product: ICartProduct })
             <TableRow hover onClick={() => setModalState(true)}>
                 <TableCell><img src={product.images[0]} className="w-16" /></TableCell>
                 <TableCell>{product.name}</TableCell>
-                <TableCell>{product.categories}</TableCell>
+                <TableCell>{product.categories.map(v => v + ", ")}</TableCell>
                 <TableCell>{product.description}</TableCell>
                 <TableCell>{product.price}</TableCell>
             </TableRow>

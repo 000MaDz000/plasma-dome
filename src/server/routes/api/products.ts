@@ -1,4 +1,4 @@
-import { Product, Image, Statistics } from "../../../models/";
+import { Product, Image, Statistics, Settings } from "../../../models/";
 import { Request, Response, Router } from "express";
 import { ObjectId } from "bson";
 import multer from "multer";
@@ -9,6 +9,7 @@ import FilterProduct from "../../../app/_functions/filter-product";
 import { IProduct } from "@/models/product";
 import { IStatisticsName } from "@/models/statistics";
 import DashboardLocker from "../lockers/pages/dashboard";
+import { ISettingName } from "@/models/settings";
 
 const ProductsRoute = Router();
 
@@ -82,8 +83,10 @@ ProductsRoute.post("/", DashboardLocker, multer().single("images"), async (req: 
             })
         }
         // create the product
+        const categories = (data.categories as unknown as string).split(",").map(category => category.trim());
+
         const saveProduct = new Product({
-            "categories": data.categories,
+            "categories": categories, // add the categories as array
             "description": data.description,
             "name": data.name,
             "price": data.price,
@@ -95,6 +98,7 @@ ProductsRoute.post("/", DashboardLocker, multer().single("images"), async (req: 
         const StatisticName1: IStatisticsName = "totalProducts";
         const StatisticName2: IStatisticsName = data.showType == "f" ? "featuredProducts" : "normalProducts";
 
+        // statistics adding
         await Statistics.updateMany({
             name: StatisticName1,
         }, { $inc: { count: 1 } }, { upsert: true });
@@ -103,6 +107,13 @@ ProductsRoute.post("/", DashboardLocker, multer().single("images"), async (req: 
             name: StatisticName2,
         }, { $inc: { count: 1 } }, { upsert: true });
 
+        // adding the categories to the settings environment if not exists
+        const categoriesName: ISettingName = "categories";
+        await Settings.updateOne({
+            "name": categoriesName
+        }, { $addToSet: { value: categories, } }, { upsert: true });
+
+        // save the product
         await saveProduct.save();
 
         res.sendStatus(200);
