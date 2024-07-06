@@ -1,25 +1,40 @@
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import ProductCard from "./product-card";
-import { Product } from "../_classes/models";
+import { Product, Advertisment } from "../_classes/models";
 import ProductsScrollableRow from "./products-scrollable-row";
+import Banner from "./banner";
 
 export default async function StoreBody() {
-    const products = await Product.find({}).limit(20).populate("images");
+    const products = await Product.find({}).limit(50).populate("images");
+    const banners = await Advertisment.find({ barName: "top", active: true }).populate("images");
 
     return (
-        <Container maxWidth="xl" className="mt-5">
-            <div className="flex flex-col gap-7">
-
-                <ProductsScrollableRow products={products as any} title="paints" />
-                <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 grid-cols-2">
-                    <>
-                        {products.map(product => (
-                            <ProductCard product={product as any} key={product._id.toString()} />
+        <div>
+            <Container maxWidth="xl" className="mt-5">
+                <div className="flex flex-col gap-7">
+                    <div>
+                        {/* top bar */}
+                        {banners.map(banner => (
+                            <Banner bannerData={banner} />
                         ))}
-                    </>
+                    </div>
+
+                    <ProductsScrollableRow products={products as any} title="paints" />
+                    <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 grid-cols-2">
+                        <>
+                            {products.map(product => (
+                                <ProductCard product={product as any} key={product._id.toString()} />
+                            ))}
+                        </>
+                    </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+
+
+            <Box className="min-h-80 bg-gray-200 mt-9">
+
+            </Box>
+        </div>
     )
 }
 
