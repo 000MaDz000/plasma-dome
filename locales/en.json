@@ -176,6 +176,10 @@
             "alerts": {
                 "close": "Close"
             }
+        },
+        "search": {
+            "no search data": "There Is No Products Of \"{searchString}\"",
+            "no data help": "Try to write general terms"
         }
     },
     "Signup": {
@@ -211,6 +215,11 @@
             "password length": "Password Length Must Be 8 at least",
             "wrong password": "The Password Is Wrong",
             "unknown type": "Unknown Error Has Been Occurd"
+        },
+        "alerts": {
+            "see your recommendations": "See Your Recommendations",
+            "dont have account": "Dont Have An Account?",
+            "create account": "Create Account"
         }
     },
     "branches": {

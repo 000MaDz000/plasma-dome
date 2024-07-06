@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import ProductCard from "./product-card";
 import { Product, Advertisment } from "../_classes/models";
 import ProductsScrollableRow from "./products-scrollable-row";
@@ -29,11 +29,6 @@ export default async function StoreBody() {
                     </div>
                 </div>
             </Container>
-
-
-            <Box className="min-h-80 bg-gray-200 mt-9">
-
-            </Box>
         </div>
     )
 }
