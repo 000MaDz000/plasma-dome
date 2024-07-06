@@ -1,13 +1,13 @@
-'use client';
-
+import getSetting from "@/app/_actions/get-setting";
 import CreateProductForm from "@/app/_components/create-product-form";
 import ProductsCountsBoxes from "@/app/_components/dashboard-products-counts-boxes";
 import ProductsTable from "@/app/_components/products-table";
 import { Box, Paper, Typography } from "@mui/material";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-export default function DashboardProductsPage() {
-    const t = useTranslations("Dashboard.products");
+export default async function DashboardProductsPage() {
+    const t = await getTranslations("Dashboard.products");
+    const systemCategories = await getSetting("categories");
 
     return (
         <div className="flex flex-col gap-4">
@@ -25,7 +25,7 @@ export default function DashboardProductsPage() {
             </Paper>
 
             <Paper>
-                <ProductsTable />
+                <ProductsTable systemCategories={systemCategories.value} />
             </Paper>
         </div>
     )

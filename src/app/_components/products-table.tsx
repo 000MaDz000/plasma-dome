@@ -6,12 +6,14 @@ import { useEffect, useMemo, useState } from "react";
 import { ProductsApi } from "../_classes/api";
 import { ICartProduct } from "../_actions/get-cart-data";
 import ProductsTableRow from "./products-table-row";
+import getSetting from "../_actions/get-setting";
 
-export default function ProductsTable({ products }: { products?: ICartProduct[] }) {
+export default function ProductsTable({ products, systemCategories }: { products?: ICartProduct[], systemCategories?: string[] }) {
     const t = useTranslations("Dashboard.products");
     const [data, setData] = useState<ICartProduct[]>(products ? products : []);
     const [isPending, setIsPending] = useState(products ? false : true);
     const api = useMemo(() => new ProductsApi(), []);
+    const [categories, setCategories] = useState<string[] | undefined>(systemCategories);
 
     useEffect(() => {
         if (isPending && !products) {
@@ -21,6 +23,14 @@ export default function ProductsTable({ products }: { products?: ICartProduct[] 
             setIsPending(false);
         }
     }, [isPending]);
+
+    useEffect(() => {
+        if (!categories) {
+            getSetting("categories").then((v) => {
+                setCategories(v.value);
+            });
+        }
+    }, []);
 
     return (
         <Box>
@@ -36,7 +46,7 @@ export default function ProductsTable({ products }: { products?: ICartProduct[] 
                 </TableHead>
 
                 <TableBody>
-                    {data.map((p) => <ProductsTableRow product={p} key={p._id} />)}
+                    {data.map((p) => <ProductsTableRow product={p} key={p._id} systemCategories={categories || []} />)}
 
                 </TableBody>
             </Table>
