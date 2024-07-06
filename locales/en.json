@@ -191,7 +191,9 @@
             },
             "alerts": {
                 "close": "Close"
-            }
+            },
+            "no data": "There Is No Products In This Page !",
+            "no data help": "Try To Seach On Your Product"
         },
         "search": {
             "no search data": "There Is No Products Of \"{searchString}\"",

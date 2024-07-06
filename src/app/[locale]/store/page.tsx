@@ -10,7 +10,7 @@ export default async function HomePage() {
 
 
     return (
-        <Box>
+        <Box className="flex flex-col min-h-screen">
             <StoreHeader />
             <StoreBody />
             {

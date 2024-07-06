@@ -1,15 +1,53 @@
-import { Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import ProductCard from "./product-card";
-import { Product, Advertisment } from "../_classes/models";
+import { Product, Advertisment, Settings } from "../_classes/models";
 import ProductsScrollableRow from "./products-scrollable-row";
 import Banner from "./banner";
+import { ISettingName } from "@/models/settings";
+import { IProduct } from "@/models/product";
+import { ICartProduct } from "../_actions/get-cart-data";
+import { getTranslations } from "next-intl/server";
 
 export default async function StoreBody() {
-    const products = await Product.find({}).limit(50).populate("images");
+    const recommendationsSettingName: ISettingName = "recommendations";
     const banners = await Advertisment.find({ barName: "top", active: true }).populate("images");
+    const recommendations = await Settings.findOne({ name: recommendationsSettingName });
+    const data: { [key: string]: ICartProduct[] } = {};
+    const t = await getTranslations("Store.body");
+
+    if (recommendations) {
+        for await (const category of recommendations.value) {
+            const products = await Product.find({
+                categories: {
+                    $in: category,
+                }
+            }).limit(21).populate("images");
+
+
+            data[category] = products.map(v => v.toObject() as any);
+            console.log(category, products);
+        }
+    }
+
+    const cards: ICartProduct[] = [];
+    const rows: ICartProduct[][] = [];
+
+    for (let category in data) {
+        if (data[category].length >= 13) {
+            rows.push(data[category]);
+        }
+        else {
+            cards.push(...data[category]);
+        }
+    }
+
+    if (!cards.length && !rows.length) {
+        const data = await Product.find({}).limit(50).populate("images");
+        cards.push(...data.map(val => val.toObject()) as any);
+    }
 
     return (
-        <div>
+        <div className="grow h-full flex flex-col">
             <Container maxWidth="xl" className="mt-5">
                 <div className="flex flex-col gap-7">
                     <div>
@@ -19,16 +57,34 @@ export default async function StoreBody() {
                         ))}
                     </div>
 
-                    <ProductsScrollableRow products={products as any} title="paints" />
+                    {rows.map(row => (
+                        <ProductsScrollableRow products={row} title={""} key={row[0]._id} />
+                    ))}
+
                     <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 grid-cols-2">
                         <>
-                            {products.map(product => (
+                            {cards.map(product => (
                                 <ProductCard product={product as any} key={product._id.toString()} />
                             ))}
                         </>
                     </div>
                 </div>
+
+
             </Container>
+
+
+            {(!rows.length && !cards.length) && (
+                <Box className="flex flex-col grow items-center justify-center">
+                    <Typography variant="h5">
+                        {t("no data")}
+                    </Typography>
+
+                    <Typography variant="h6">
+                        {t("no data help")}
+                    </Typography>
+                </Box>
+            )}
         </div>
     )
 }
