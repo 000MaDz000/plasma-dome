@@ -23,13 +23,14 @@ export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled }
 
     return (
         <>
-            <TableRow hover className="cursor-pointer" onClick={() => setModal(true)}>
-                <TableCell align="center">{order.customerName}</TableCell>
-                <TableCell align="center">{order.customerPhone}</TableCell>
-                <TableCell align="center">{order.deleveryAddress || "-"}</TableCell>
-                <TableCell align="center">{order.orderDate.toString()}</TableCell>
-                <TableCell align="center">{order.ended ? t("ended") : order.cancled?.status ? t("canceled") : t("pending")}</TableCell>
-                <TableCell align="center">{t("egp", { price: order.totalPrice })}</TableCell>
+            <TableRow hover className="cursor-pointer">
+                <TableCell align="center" onClick={() => setModal(true)}>{order.customerName}</TableCell>
+                <TableCell align="center" onClick={() => setModal(true)}>{order.customerPhone}</TableCell>
+                <TableCell align="center" onClick={() => setModal(true)}>{order.deleveryAddress || "-"}</TableCell>
+                <TableCell align="center" onClick={() => setModal(true)}>{order.orderDate.toString()}</TableCell>
+                <TableCell align="center" onClick={() => setModal(true)}>{order.ended ? t("ended") : order.cancled?.status ? t("canceled") : t("pending")}</TableCell>
+                <TableCell align="center" onClick={() => setModal(true)}>{t("egp", { price: order.totalPrice })}</TableCell>
+
                 <TableCell>
                     <IconButton onClick={() => setDetails(!details)}>
                         <FaArrowDown />
