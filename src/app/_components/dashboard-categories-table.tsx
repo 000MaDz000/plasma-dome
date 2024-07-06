@@ -8,7 +8,7 @@ import { FaPlus, FaTrash } from "react-icons/fa";
 import Modal from "./modal";
 import setSetting from "../_actions/set-setting";
 
-export default function DashboardRecommendationsTable(props: { data: ISetting, noDataMessage: string, title: string, onAdd: (name: string) => void }) {
+export default function DashboardCategoriesTable(props: { data: ISetting, noDataMessage: string, title: string, onAdd: (name: string) => void }) {
     const t = useTranslations("Dashboard.recommendations");
     const [data, setData] = useState(props.data.value);
     const [modal, setModal] = useState(false);
