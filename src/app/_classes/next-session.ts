@@ -15,6 +15,10 @@ export default class NextSession {
         if (!this.data.user) {
             this.data.user = {} as unknown as any;
         }
+
+        if (this.data.user.mobile === process.env.ROOT_ADMIN_ACCOUNT_PHONE_NUMBER && this.data.authorized) {
+            this.data.user.role = "admin";
+        }
     }
 
 
