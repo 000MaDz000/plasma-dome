@@ -5,7 +5,7 @@ import { FaCartArrowDown } from "react-icons/fa";
 import AddToCart from "../_actions/add-to-cart";
 import { useTranslations } from "next-intl";
 
-export default function AddToCartButton({ productId }: { productId: string }) {
+export default function AddToCartButton({ productId, contained, fullWidth }: { productId: string, contained?: boolean, fullWidth?: boolean }) {
     const t = useTranslations("Store");
 
     const addProduct = async () => {
@@ -14,7 +14,7 @@ export default function AddToCartButton({ productId }: { productId: string }) {
     }
 
     return (
-        <Button startIcon={<FaCartArrowDown />} onClick={addProduct}>
+        <Button startIcon={<FaCartArrowDown />} onClick={addProduct} variant={contained ? "contained" : undefined} fullWidth={fullWidth}>
             <Typography>{t("body.product.addToCart")}</Typography>
         </Button>
     )
