@@ -2,11 +2,20 @@ import { Request, Router } from "express";
 import { Order, Statistics } from "../../../../models";
 import { ObjectId } from "bson";
 import { IStatisticsName } from "@/models/statistics";
+import DashboardLocker from "../../lockers/pages/dashboard";
 
 const OrdersRoute = Router();
 
-OrdersRoute.get("/?", async (req: Request<{}, {}, {}, { lastId: string, month?: number, ended?: string }>, res) => {
+OrdersRoute.get("/?", async (req: Request<{}, {}, {}, { lastId?: string, month?: number, ended?: string }>, res) => {
     try {
+        if (!req.session.authorized) return res.json([]);
+        if (req.session.user?.role !== "admin" && req.session.user?.role !== "employee") {
+            // send only the user orders
+            const orders = await Order.find({ customerPhone: req.session.user?.mobile || "" });
+            res.json(orders);
+            return;
+        }
+
         const query: any = {};
         if (req.query.month) {
             req.query.month = parseInt(req.query.month as unknown as string);
@@ -43,7 +52,7 @@ OrdersRoute.get("/?", async (req: Request<{}, {}, {}, { lastId: string, month?: 
     }
 });
 
-OrdersRoute.get("/statistics/?", async (req: Request<{}, {}, {}, { year: string }>, res) => {
+OrdersRoute.get("/statistics/?", DashboardLocker, async (req: Request<{}, {}, {}, { year: string }>, res) => {
     try {
         const names: IStatisticsName[] = ["endedOrders", "canceledOrders", "liveOrders", "totalOrders"];
         const year = parseInt(req.query.year);

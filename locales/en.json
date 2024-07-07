@@ -13,6 +13,10 @@
         },
         "sections": "Sections"
     },
+    "User": {
+        "your cart": "Your Cart",
+        "your orders": "Your Orders"
+    },
     "Dashboard": {
         "add": "Add",
         "home": {
@@ -57,6 +61,7 @@
             "normal count": "Normal Products Count"
         },
         "orders": {
+            "are you sure": "Are You Sure You Want Cancel The Order?",
             "customer name": "Customer Name",
             "customer phone": "Customer Phone",
             "delevery location": "Delevery Location",
@@ -161,7 +166,8 @@
         "header": {
             "searchPlaceholder": "Search here",
             "your cart": "Your Cart",
-            "your orders": "Your Orders"
+            "your orders": "Your Orders",
+            "you": "you"
         },
         "body": {
             "product": {

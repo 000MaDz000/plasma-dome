@@ -103,9 +103,14 @@ export async function createOrder(verifyCode: string) {
 
 export default async function EndOrder(id: string) {
     if (!id || id.length !== 24) return 400;
+    const sess = await session();
     const order = await Order.findById(id);
 
     if (!order || order.ended) return 400;
+    if (!sess.data.authorized) return 400;
+    if (sess.data.user.role !== "admin" && sess.data.user.role !== "employee") {
+        if (order.customerPhone !== sess.data.user.mobile) return 400
+    }
 
     order.ended = true;
     await order.save();

@@ -7,7 +7,7 @@ import { FaArrowDown } from "react-icons/fa";
 import Modal from "./modal";
 import ProductsTable from "./products-table";
 
-export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled }: { order: IOrder, onOrderEnd: () => void, onOrderCanceled: () => void }) {
+export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled, userAlertsRole }: { order: IOrder, userAlertsRole?: "admin" | "employee" | "customer", onOrderEnd: () => void, onOrderCanceled: () => void }) {
     const t = useTranslations("Dashboard.orders");
     const [details, setDetails] = useState(false);
     const [modal, setModal] = useState(false);
@@ -55,10 +55,13 @@ export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled }
                     <Modal open onClose={() => setModal(false)}>
                         <Box className="flex flex-col gap-7">
                             <Box className="flex flex-col gap-3">
-                                <Typography variant="h6">{t("is ended")}</Typography>
-                                <Typography color="orange" className="text-center">{t("mark as ended alert")}</Typography>
+
+                                {userAlertsRole == "customer" && <Typography variant="h6">{t("are you sure")}</Typography>}
+                                {(userAlertsRole == "admin" || userAlertsRole == "employee") && <Typography variant="h6">{t("is ended")}</Typography>}
+                                {(userAlertsRole == "admin" || userAlertsRole == "employee") && <Typography color="orange" className="text-center">{t("mark as ended alert")}</Typography>}
                             </Box>
-                            <Button color={"success"} onClick={onClickEnd}>{t("ended confirm")}</Button>
+
+                            {(userAlertsRole == "admin" || userAlertsRole == "employee") && <Button color={"success"} onClick={onClickEnd}>{t("ended confirm")}</Button>}
                             <Button color={"error"} onClick={onCancel}>{t("cancel order")}</Button>
                         </Box>
                     </Modal>

@@ -5,7 +5,7 @@ import getCartData, { ICartProduct } from "../_actions/get-cart-data";
 import { Skeleton, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useTranslations } from "next-intl";
 
-export default function CreateOrderPage({ setDisabled }: { setDisabled: (val: boolean) => void }) {
+export default function CreateOrderPage({ setDisabled }: { setDisabled?: (val: boolean) => void }) {
     const [data, setData] = useState<ICartProduct[]>([]);
     const [pending, setPending] = useState(true);
     const t = useTranslations("Store.body.product")
@@ -22,7 +22,7 @@ export default function CreateOrderPage({ setDisabled }: { setDisabled: (val: bo
     }, [pending]);
 
     if (!pending) {
-        if (data.length) {
+        if (data.length && setDisabled) {
             setDisabled(false);
         }
     }
@@ -54,7 +54,7 @@ export default function CreateOrderPage({ setDisabled }: { setDisabled: (val: bo
                 </TableBody>
             </Table>
 
-            {data.length === 0 && (
+            {data.length === 0 && !pending && (
                 <div className="flex items-center justify-center p-4 mt-7">
                     {t("empty cart")}
                 </div>

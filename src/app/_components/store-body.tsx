@@ -4,7 +4,6 @@ import { Product, Advertisment, Settings } from "../_classes/models";
 import ProductsScrollableRow from "./products-scrollable-row";
 import Banner from "./banner";
 import { ISettingName } from "@/models/settings";
-import { IProduct } from "@/models/product";
 import { ICartProduct } from "../_actions/get-cart-data";
 import { getTranslations } from "next-intl/server";
 
@@ -25,7 +24,6 @@ export default async function StoreBody() {
 
 
             data[category] = products.map(v => v.toObject() as any);
-            console.log(category, products);
         }
     }
 

@@ -7,7 +7,7 @@ import { IOrder } from "@/models/order";
 import DashboardOrderRow from "./dashboard-order-row";
 import EndOrder, { CancelOrder } from "../_actions/order";
 
-export default function DashboardOrdersTable() {
+export default function DashboardOrdersTable({ userAlertsRole }: { userAlertsRole?: "admin" | "employee" | "customer" }) {
     const t = useTranslations("Dashboard.orders");
     const [pending, setPending] = useState(true);
     const [data, setData] = useState<IOrder[]>([]);
@@ -56,7 +56,7 @@ export default function DashboardOrdersTable() {
                 <TableBody>
                     {
                         data.map((order) => (
-                            <DashboardOrderRow order={order} key={order._id} onOrderEnd={() => remove(order)} onOrderCanceled={() => onOrderCanceled(order)} />
+                            <DashboardOrderRow order={order} key={order._id} onOrderEnd={() => remove(order)} onOrderCanceled={() => onOrderCanceled(order)} userAlertsRole={userAlertsRole} />
                         ))
                     }
                 </TableBody>

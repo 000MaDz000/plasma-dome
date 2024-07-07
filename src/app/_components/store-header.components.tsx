@@ -6,6 +6,7 @@ import StoreCartIcon from "./store-cart-icon";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { KeyboardEventHandler, useRef } from "react";
+import UserIcon from "./user-icon";
 
 export default function StoreHeaderComponents() {
     const t = useTranslations("Store.header")
@@ -40,6 +41,7 @@ export default function StoreHeaderComponents() {
             </Tooltip>
 
 
+            <UserIcon />
             <Input
                 startAdornment={(
                     <InputAdornment position="start">
