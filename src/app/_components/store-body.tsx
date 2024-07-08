@@ -6,6 +6,7 @@ import Banner from "./banner";
 import { ISettingName } from "@/models/settings";
 import { ICartProduct } from "../_actions/get-cart-data";
 import { getTranslations } from "next-intl/server";
+import { IImage } from "@/models/image";
 
 export default async function StoreBody() {
     const recommendationsSettingName: ISettingName = "recommendations";
@@ -51,7 +52,7 @@ export default async function StoreBody() {
                     <div>
                         {/* top bar */}
                         {banners.map(banner => (
-                            <Banner bannerData={banner} />
+                            <Banner bannerData={{ ...banner.toObject(), images: banner.images.map(img => (img as unknown as IImage).relativeUrl) }} key={banner.barName} />
                         ))}
                     </div>
 
