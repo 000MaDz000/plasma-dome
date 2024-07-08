@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { KeyboardEventHandler, useRef } from "react";
 import UserIcon from "./user-icon";
+import LanguageIcon from "./language-icon";
 
 export default function StoreHeaderComponents() {
     const t = useTranslations("Store.header")
@@ -32,13 +33,9 @@ export default function StoreHeaderComponents() {
 
     return (
         <>
+            <LanguageIcon />
             <StoreCartIcon />
 
-            <Tooltip title={t("your orders")}>
-                <IconButton>
-                    <FaMotorcycle />
-                </IconButton>
-            </Tooltip>
 
 
             <UserIcon />

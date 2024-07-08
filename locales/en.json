@@ -1,4 +1,8 @@
 {
+    "Locales": {
+        "ar": "Arabic",
+        "en": "English"
+    },
     "Index": {
         "title": "Plasmadome",
         "body": {
