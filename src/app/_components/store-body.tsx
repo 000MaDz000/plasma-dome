@@ -16,13 +16,15 @@ export default async function StoreBody() {
     const t = await getTranslations("Store.body");
 
     if (recommendations) {
+        let fetched: string[] = [];
         for await (const category of recommendations.value) {
             const products = await Product.find({
                 categories: {
                     $in: category,
+                    $nin: fetched,
                 }
             }).limit(21).populate("images");
-
+            fetched.push(category);
 
             data[category] = products.map(v => v.toObject() as any);
         }
@@ -60,7 +62,7 @@ export default async function StoreBody() {
                         <ProductsScrollableRow products={row} title={""} key={row[0]._id} />
                     ))}
 
-                    <div className="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 grid-cols-2">
+                    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 grid-cols-1">
                         <>
                             {cards.map(product => (
                                 <ProductCard product={product as any} key={product._id.toString()} />
