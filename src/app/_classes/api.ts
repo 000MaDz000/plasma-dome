@@ -63,6 +63,29 @@ export class ProductsApi {
             return 400
         }
     }
+
+    async updateData(productId: string, data: { price?: string, name?: string, discount?: string, description?: string }) {
+        try {
+            const body: any = {};
+            if (data.price) body.price = data.price;
+            if (data.name) body.name = data.name;
+            if (data.discount) body.discount = data.discount;
+            if (data.description) body.description = data.description;
+
+            const res = await fetch("/api/products/" + productId, {
+                method: "put",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+
+            return res.status;
+        }
+        catch (err) {
+            return 400;
+        }
+    }
 }
 
 export class OrdersApi {

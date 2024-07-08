@@ -148,17 +148,23 @@ ProductsRoute.get("/statistics", DashboardLocker, async (req, res) => {
     }
 });
 
-ProductsRoute.put("/:productId", DashboardLocker, async (req: Request<{ productId: string }, {}, { categories: string }>, res) => {
+ProductsRoute.put("/:productId", DashboardLocker, async (req: Request<{ productId: string }, {}, { categories?: string, price?: string, name?: string, discount?: string, description?: string }>, res) => {
     try {
         // 24 is ObjectId hex characters length
         if (!req.params.productId || req.params.productId.length !== 24) return res.sendStatus(404);
-        if (!req.body?.categories) return res.sendStatus(400);
         const product = await Product.findById(req.params.productId);
         if (!product) return res.sendStatus(404);
 
-        const splited = req.body.categories.split(",").map(category => category.trim());
+        if (req.body.categories && req.body.categories.length) {
+            const splited = req.body.categories.split(",").map(category => category.trim());
+            product.categories = splited;
+        }
 
-        product.categories = splited;
+        if (req.body.name && req.body.name.length) product.name = req.body.name;
+        if (req.body.price && !isNaN(parseFloat(req.body.price))) product.price = parseFloat(req.body.price);
+        if (req.body.discount && !isNaN(parseFloat(req.body.discount))) product.discount = parseFloat(req.body.discount);
+        if (req.body.description && req.body.description.length) product.description = req.body.description;
+
         await product.save();
 
         res.sendStatus(200);

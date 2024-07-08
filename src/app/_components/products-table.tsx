@@ -33,7 +33,7 @@ export default function ProductsTable({ products, systemCategories }: { products
     }, []);
 
     return (
-        <Box>
+        <Box className="overflow-x-auto">
             <Table>
                 <TableHead>
                     <TableRow>
@@ -42,6 +42,8 @@ export default function ProductsTable({ products, systemCategories }: { products
                         <TableCell>{t("categories")}</TableCell>
                         <TableCell>{t("description")}</TableCell>
                         <TableCell>{t("price")}</TableCell>
+                        <TableCell>{t("discount")}</TableCell>
+                        <TableCell>{t("total")}</TableCell>
                     </TableRow>
                 </TableHead>
 

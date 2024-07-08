@@ -7,6 +7,7 @@ export interface IProduct {
     images: ObjectId[];
     description: string;
     price: number;
+    discount?: number;
     tax: number;
     profitRatio: number;
     showTypes: ({ showType: "featured" | "normal", level: number })[]
@@ -47,6 +48,7 @@ const ProductSchema = new mongoose.Schema<IProduct>({
         type: Number,
         required: true,
     },
+    discount: Number,
     tax: {
         type: Number, // percent number represents the  tax rate (e.g., 10 for a 10% tax)
     },

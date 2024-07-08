@@ -47,6 +47,7 @@
             "name": "Product Name",
             "description": "product Description",
             "quantity": "Quantity",
+            "discount": "Discount",
             "categories": "Categories",
             "images": "Product Image",
             "price": "Price",
@@ -62,7 +63,10 @@
             "featured": "Featured",
             "show type level": "Show Level",
             "featured count": "Featured Products Count",
-            "normal count": "Normal Products Count"
+            "normal count": "Normal Products Count",
+            "submit edit": "Save",
+            "discount persent": "{discount} %",
+            "total": "Total Price"
         },
         "orders": {
             "are you sure": "Are You Sure You Want Cancel The Order?",
