@@ -31,39 +31,27 @@ export default async function ProductPage({ params }: { params: { locale: string
 
                     </div>
 
-                    <div className="flex-grow-[2] p-4">
-                        <div className="flex flex-col gap-7 justify-between">
-                            <div className="flex flex-col gap-4">
-                                <div className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:text-center">
+                    <div className="flex-grow-[2] p-4 flex flex-col justify-between">
 
-                                    <div>
-                                        <Typography variant="h6">{t("egp", { price: product?.price })}</Typography>
-                                    </div>
+                        <div className="flex flex-col">
 
-                                    <div className="hidden lg:block">
-                                        <Typography variant="h6">{t("name")}</Typography>
-                                        <Typography>{product?.name}</Typography>
-                                    </div>
-
-                                    <div>
-                                        <Typography variant="h6">{t("description")}</Typography>
-                                        <Typography>{product?.description}</Typography>
-                                    </div>
-
-                                    <div>
-                                        <Typography variant="h6">{t("categories")}</Typography>
-                                        {product?.categories.map(category => (
-                                            <Typography key={category} display={"inline-block"} whiteSpace={"nowrap"} mx={2}>{category}</Typography>
-                                        ))}
-                                    </div>
-                                </div>
+                            <div>
+                                <Typography variant="h6">{t("egp", { price: product?.price })}</Typography>
                             </div>
 
-
-
-                            <div className="flex justify-center ">
-                                <AddToCartButton productId={productId} contained fullWidth />
+                            <div className="hidden lg:block">
+                                <Typography my={2}>{product?.name}</Typography>
                             </div>
+
+                            <div>
+                                <Typography variant="h6">{t("description")}</Typography>
+                                <Typography>{product?.description}</Typography>
+                            </div>
+                        </div>
+
+
+                        <div className="flex justify-center mt-4">
+                            <AddToCartButton productId={productId} contained fullWidth />
                         </div>
                     </div>
                 </div>
