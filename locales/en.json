@@ -89,6 +89,12 @@
             "is ended": "Are The Order Ended ?",
             "mark as ended alert": "When You Click On this Button, The Order Will Be Ended",
             "count": "Orders Count",
+            "status": {
+                "pending": "Pending",
+                "completed": "Completed",
+                "shipped": "Shipped",
+                "cancelled": "Cancelled"
+            },
             "chart": {
                 "success orders": "Success Orders",
                 "canceled orders": "Canceled Orders",

@@ -1,6 +1,7 @@
 import { ICartProduct } from "@/app/_actions/get-cart-data";
 import { Model, model, Schema } from "mongoose";
 
+export type IOrderStatus = "pending" | "cancelled" | "shipped" | "completed"
 export interface IOrder {
     _id?: any;
     customerName: string;
@@ -9,6 +10,7 @@ export interface IOrder {
     orderDate: Date;
     products: ICartProduct[];
     ended: boolean;
+    status?: IOrderStatus,
     cancled?: {
         status: boolean;
         reason: string;
@@ -33,19 +35,9 @@ const OrderSchema = new Schema<IOrder>({
         type: Date,
         default: Date.now
     },
-    ended: {
-        type: Boolean,
-        default: false,
-    },
-    cancled: {
-        status: {
-            type: Boolean,
-            default: false,
-        },
-        reason: {
-            type: String,
-            default: "",
-        }
+    status: {
+        type: String,
+        default: "pending"
     },
     deleveryAddress: String,
     products: {

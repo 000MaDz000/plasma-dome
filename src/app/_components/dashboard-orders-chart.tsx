@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { OrdersApi } from "../_classes/api";
 import { useTranslations } from "next-intl";
 import { IStatistics } from "@/models/statistics";
-import { CircularProgress, Skeleton, Typography } from "@mui/material";
+import { Skeleton, Typography } from "@mui/material";
 
 export default function DashboardOrdersChart() {
     const api = useMemo(() => new OrdersApi(), []);
@@ -75,7 +75,6 @@ export default function DashboardOrdersChart() {
     useEffect(() => {
         api.fetchStatistics().then(setStatistics);
     }, []);
-    console.log(statistics);
 
     return (
         statistics.length ?

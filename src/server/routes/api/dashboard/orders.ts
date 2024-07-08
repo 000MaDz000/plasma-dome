@@ -3,6 +3,7 @@ import { Order, Statistics } from "../../../../models";
 import { ObjectId } from "bson";
 import { IStatisticsName } from "@/models/statistics";
 import DashboardLocker from "../../lockers/pages/dashboard";
+import { IOrderStatus } from "@/models/order";
 
 const OrdersRoute = Router();
 
@@ -64,5 +65,44 @@ OrdersRoute.get("/statistics/?", DashboardLocker, async (req: Request<{}, {}, {}
     }
 });
 
+
+OrdersRoute.put("/:orderId", DashboardLocker, async (req: Request<{ orderId: string }, {}, { status: IOrderStatus }>, res) => {
+    try {
+        const status: IOrderStatus = req.body.status;
+        const OBJECTID_LENGTH = 24;
+        if (req.params.orderId.length !== OBJECTID_LENGTH) return res.sendStatus(404);
+        if (status !== "pending" && status !== "cancelled" && status !== "shipped" && status !== "completed") return res.sendStatus(400);
+        const order = await Order.findById(req.params.orderId);
+
+        if (!order) return res.sendStatus(404);
+
+        order.status = status;
+
+        await order.save();
+        res.sendStatus(200);
+
+
+
+        // change statistice
+        switch (status) {
+            case "cancelled":
+
+                break;
+
+            case "completed":
+                break;
+
+            case "pending":
+                break;
+
+            case "shipped":
+                break;
+
+        }
+    }
+    catch (err) {
+        res.sendStatus(500);
+    }
+});
 
 export default OrdersRoute;

@@ -1,24 +1,26 @@
 'use client';
-import { IOrder } from "@/models/order";
-import { Box, Button, IconButton, Paper, TableCell, TableRow, Typography } from "@mui/material";
+import { IOrder, IOrderStatus } from "@/models/order";
+import { FormControl, IconButton, MenuItem, Paper, Select, TableCell, TableRow } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FaArrowDown } from "react-icons/fa";
-import Modal from "./modal";
 import ProductsTable from "./products-table";
+import { OrdersApi } from "../_classes/api";
 
-export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled, userAlertsRole }: { order: IOrder, userAlertsRole?: "admin" | "employee" | "customer", onOrderEnd: () => void, onOrderCanceled: () => void }) {
+export default function DashboardOrderRow({ order, onChangeStatus, userAlertsRole }: { order: IOrder, userAlertsRole?: "admin" | "employee" | "customer", onChangeStatus: (status: IOrderStatus) => void }) {
     const t = useTranslations("Dashboard.orders");
     const [details, setDetails] = useState(false);
     const [modal, setModal] = useState(false);
-    const onClickEnd = () => {
-        setModal(false);
-        onOrderEnd();
-    }
+    const api = useMemo(() => new OrdersApi(), []);
 
-    const onCancel = async () => {
-        setModal(false);
-        onOrderCanceled();
+    const changeStatus = async (status: IOrderStatus) => {
+        const code = await api.updateStatus(order._id, status);
+        if (code == 200) {
+            onChangeStatus(status);
+        }
+        else {
+            // error
+        }
     }
 
     return (
@@ -28,7 +30,16 @@ export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled, 
                 <TableCell align="center" onClick={() => setModal(true)}>{order.customerPhone}</TableCell>
                 <TableCell align="center" onClick={() => setModal(true)}>{order.deleveryAddress || "-"}</TableCell>
                 <TableCell align="center" onClick={() => setModal(true)}>{order.orderDate.toString()}</TableCell>
-                <TableCell align="center" onClick={() => setModal(true)}>{order.ended ? t("ended") : order.cancled?.status ? t("canceled") : t("pending")}</TableCell>
+                <TableCell align="center" onClick={() => setModal(true)}>
+                    <FormControl>
+                        <Select value={order.status || "pending"} onChange={(e) => changeStatus(e.target.value as IOrderStatus)}>
+                            <MenuItem value={"pending"}>{t("status.pending")}</MenuItem>
+                            <MenuItem value={"shipped"}>{t("status.shipped")}</MenuItem>
+                            <MenuItem value={"completed"}>{t("status.completed")}</MenuItem>
+                            <MenuItem value={"cancelled"}>{t("status.cancelled")}</MenuItem>
+                        </Select>
+                    </FormControl>
+                </TableCell>
                 <TableCell align="center" onClick={() => setModal(true)}>{t("egp", { price: order.totalPrice })}</TableCell>
 
                 <TableCell>
@@ -50,7 +61,7 @@ export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled, 
                 )
             }
 
-            {
+            {/* {
                 (modal && !order.ended && !order.cancled?.status) && (
                     <Modal open onClose={() => setModal(false)}>
                         <Box className="flex flex-col gap-7">
@@ -66,7 +77,7 @@ export default function DashboardOrderRow({ order, onOrderEnd, onOrderCanceled, 
                         </Box>
                     </Modal>
                 )
-            }
+            } */}
         </>
     )
 }

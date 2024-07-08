@@ -1,9 +1,9 @@
 'use client';
 import { Box, Skeleton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { OrdersApi } from "../_classes/api";
-import { IOrder } from "@/models/order";
+import { IOrder, IOrderStatus } from "@/models/order";
 import DashboardOrderRow from "./dashboard-order-row";
 import EndOrder, { CancelOrder } from "../_actions/order";
 
@@ -12,6 +12,7 @@ export default function DashboardOrdersTable({ userAlertsRole }: { userAlertsRol
     const [pending, setPending] = useState(true);
     const [data, setData] = useState<IOrder[]>([]);
     const api = useMemo(() => new OrdersApi(), []);
+    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         if (!pending) return;
@@ -21,21 +22,10 @@ export default function DashboardOrdersTable({ userAlertsRole }: { userAlertsRol
 
     }, [pending]);
 
-    const remove = async (order: IOrder) => {
-        EndOrder(order._id).then((res) => {
-            if (res === 200) {
-                setData(data.map(obj => obj._id === order._id ? { ...order, ended: true } : obj));
-            }
-        })
-
-    }
-
-    const onOrderCanceled = async (order: IOrder) => {
-        CancelOrder(order._id).then(res => {
-            if (res === 200) {
-                setData(data.map(obj => obj._id === order._id ? { ...order, cancled: { status: true, reason: "" } } : obj));
-            }
-        })
+    const onChangeStatus = (newStatus: IOrderStatus, orderId: string) => {
+        startTransition(() => {
+            setData(data.map(val => val._id === orderId ? { ...val, status: newStatus } : val));
+        });
     }
 
     return (
@@ -56,7 +46,7 @@ export default function DashboardOrdersTable({ userAlertsRole }: { userAlertsRol
                 <TableBody>
                     {
                         data.map((order) => (
-                            <DashboardOrderRow order={order} key={order._id} onOrderEnd={() => remove(order)} onOrderCanceled={() => onOrderCanceled(order)} userAlertsRole={userAlertsRole} />
+                            <DashboardOrderRow onChangeStatus={(status: IOrderStatus) => onChangeStatus(status, order._id)} order={order} key={order._id} userAlertsRole={userAlertsRole} />
                         ))
                     }
                 </TableBody>

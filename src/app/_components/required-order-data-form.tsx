@@ -2,7 +2,7 @@
 
 import { Button, TextField, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { createOrder, setOrderData } from "../_actions/order";
+import { setOrderData } from "../_actions/order";
 import { useState } from "react";
 import { IOrder } from "@/models/order";
 
@@ -15,25 +15,25 @@ export default function RequiredOrderDataForm({ onOrderCreated, disabled }: { on
 
     const onConfirm = async (data: FormData) => {
 
-        if (!isCode) {
-            let err = await setOrderData(data);
+        // if (!isCode) {
+        //     let err = await setOrderData(data);
 
-            if (err === 400) {
-                setOrderErr(true);
-                return;
-            }
+        //     if (err === 400) {
+        //         setOrderErr(true);
+        //         return;
+        //     }
 
-            setIsCode(true);
+        //     setIsCode(true);
 
-            return;
-        }
+        //     return;
+        // }
 
-        const res = await createOrder(data.get("code")?.toString() || "");
-        if (res === 400) setCodeErr(true);
+        // const res = await createOrder(data.get("code")?.toString() || "");
+        // if (res === 400) setCodeErr(true);
 
-        if (typeof res !== "number") {
-            onOrderCreated(res);
-        }
+        // if (typeof res !== "number") {
+        //     onOrderCreated(res);
+        // }
 
     };
 

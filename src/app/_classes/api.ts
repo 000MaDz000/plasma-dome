@@ -1,4 +1,4 @@
-import { IOrder } from "@/models/order";
+import { IOrder, IOrderStatus } from "@/models/order";
 import { ICartProduct } from "../_actions/get-cart-data";
 import { IStatistics } from "@/models/statistics";
 import { IUser } from "@/models/user";
@@ -116,6 +116,23 @@ export class OrdersApi {
         }
         catch (err) {
             return [];
+        }
+    }
+
+    async updateStatus(orderId: string, status: IOrderStatus) {
+        try {
+            const res = await fetch("/api/dashboard/orders/" + orderId, {
+                body: JSON.stringify({ status }),
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            return res.status;
+        }
+        catch (err) {
+            return 400;
         }
     }
 
