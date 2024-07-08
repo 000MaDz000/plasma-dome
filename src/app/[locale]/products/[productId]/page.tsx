@@ -14,13 +14,13 @@ export default async function ProductPage({ params }: { params: { locale: string
             <Container>
                 <div className="grow flex flex-col lg:flex-row gap-4 bg-gray-200 p-3">
                     <div className="flex-1 flex justify-between mx-auto w-full bg-slate-50">
-                        <div>
+                        <div className="flex items-center justify-center w-full min-w-44">
                             {/* {
                             product?.images.map(img => (
                                 <img src={(img as unknown as IImage).relativeUrl} key={(img as any)._id.toString()} className="m-2 p-2 w-full max-w-96" />
                             ))
                         } */}
-                            <img src={(product?.images[0] as any).relativeUrl} alt="" />
+                            <img src={(product?.images[0] as any).relativeUrl} alt="" className="max-w-full" />
                         </div>
 
 
@@ -34,27 +34,31 @@ export default async function ProductPage({ params }: { params: { locale: string
                     <div className="flex-grow-[2] p-4">
                         <div className="flex flex-col gap-7 justify-between">
                             <div className="flex flex-col gap-4">
-                                <div>
-                                    <Typography variant="h6">{t("egp", { price: product?.price })}</Typography>
-                                </div>
+                                <div className="flex flex-col gap-4 lg:flex-row lg:justify-between lg:text-center">
 
-                                <div className="hidden lg:block">
-                                    <Typography variant="h6">{t("name")}</Typography>
-                                    <Typography>{product?.name}</Typography>
-                                </div>
+                                    <div>
+                                        <Typography variant="h6">{t("egp", { price: product?.price })}</Typography>
+                                    </div>
 
-                                <div>
-                                    <Typography variant="h6">{t("description")}</Typography>
-                                    <Typography>{product?.description}</Typography>
-                                </div>
+                                    <div className="hidden lg:block">
+                                        <Typography variant="h6">{t("name")}</Typography>
+                                        <Typography>{product?.name}</Typography>
+                                    </div>
 
-                                <div>
-                                    <Typography variant="h6">{t("categories")}</Typography>
-                                    {product?.categories.map(category => (
-                                        <Typography key={category} display={"inline-block"} whiteSpace={"nowrap"} mx={2}>{category}</Typography>
-                                    ))}
+                                    <div>
+                                        <Typography variant="h6">{t("description")}</Typography>
+                                        <Typography>{product?.description}</Typography>
+                                    </div>
+
+                                    <div>
+                                        <Typography variant="h6">{t("categories")}</Typography>
+                                        {product?.categories.map(category => (
+                                            <Typography key={category} display={"inline-block"} whiteSpace={"nowrap"} mx={2}>{category}</Typography>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
+
 
 
                             <div className="flex justify-center ">

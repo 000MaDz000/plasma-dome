@@ -13,8 +13,7 @@ export default function ProductsScrollableRow({ products, title }: { products: P
             <Paper className="p-7">
                 <Typography variant="h5" mb={3} className="capitalize" fontFamily={"sans-serif"} >{title}</Typography>
                 <div className="flex gap-4 overflow-x-auto md:overflow-x-hidden" id={id} >
-                    {products.map(product => <ProductCard product={product} key={product._id} />)}
-                    {products.map(product => <ProductCard product={product} key={product._id} />)}
+                    {products.map(product => <ProductCard product={product} key={product._id} hideAddToCart />)}
                 </div>
             </Paper>
 
