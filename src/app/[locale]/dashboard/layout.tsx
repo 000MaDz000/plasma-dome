@@ -2,11 +2,9 @@
 import DashboardSidebar from "@/app/_components/dashboard-side-bar";
 import Header from "@/app/_components/header";
 import OpenCloseContext from "@/app/_contexts/openclose";
-import { Box, IconButton, Paper, Tooltip } from "@mui/material";
+import { Box, IconButton, Paper } from "@mui/material";
 import { useTranslations } from "next-intl";
-import React, { useEffect, useState } from "react";
-import { FaBell } from "react-icons/fa";
-import { FaPerson } from "react-icons/fa6";
+import React, { useState } from "react";
 import { MdMenu } from "react-icons/md";
 
 
@@ -21,18 +19,6 @@ export default function DashboardPage({ children }: { children: React.ReactNode 
 
                 <Header className="bg-none">
                     <Box className="flex gap-3">
-
-                        <Tooltip title={t("notifications")}>
-                            <IconButton>
-                                <FaBell />
-                            </IconButton>
-                        </Tooltip>
-
-                        <Tooltip title={t("your account")}>
-                            <IconButton>
-                                <FaPerson />
-                            </IconButton>
-                        </Tooltip>
 
                         <div className="md:hidden" >
 
