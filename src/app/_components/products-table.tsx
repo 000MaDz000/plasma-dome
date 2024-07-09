@@ -48,7 +48,7 @@ export default function ProductsTable({ products, systemCategories, userAlertsRo
                 </TableHead>
 
                 <TableBody>
-                    {data.map((p) => <ProductsTableRow product={p} key={p._id} systemCategories={categories || []} api={api} changeModal={false} />)}
+                    {data.map((p) => <ProductsTableRow product={p} key={p._id} systemCategories={categories || []} api={api} changeModal={userAlertsRole === "customer"} />)}
 
                 </TableBody>
             </Table>

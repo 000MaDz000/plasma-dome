@@ -82,11 +82,14 @@ export default function productsTableRow(props: { product: ICartProduct, systemC
                 <TableCell onClick={() => setModalState(true)}>{product.price}</TableCell>
                 <TableCell onClick={() => setModalState(true)}>{(product as any).discount ? t("products.discount persent", { discount: (product as any).discount }) : 0}</TableCell>
                 <TableCell onClick={() => setModalState(true)}>{(product as any).discount ? product.price - ((product.price * (product as any).discount) / 100) : product.price}</TableCell>
-                <TableCell>
-                    <IconButton onClick={() => console.log("coming soon")}>
-                        <FaTrash />
-                    </IconButton>
-                </TableCell>
+                {props.changeModal === false && (
+
+                    <TableCell>
+                        <IconButton onClick={() => console.log("coming soon")}>
+                            <FaTrash />
+                        </IconButton>
+                    </TableCell>
+                )}
             </TableRow>
 
             {

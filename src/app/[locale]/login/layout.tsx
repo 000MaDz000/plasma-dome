@@ -1,4 +1,4 @@
-import Header from "@/app/_components/header";
+import StoreHeader from "@/app/_components/store-header";
 import { Paper } from "@mui/material";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -7,7 +7,7 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
     return (
         <div className="flex flex-col h-screen">
             <Paper>
-                <Header className="bg-none" />
+                <StoreHeader />
             </Paper>
 
             <div className="h-full flex items-center justify-center">

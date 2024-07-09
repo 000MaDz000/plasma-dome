@@ -13,6 +13,7 @@ import ApiRoute from "./routes/api";
 import { imagesPath } from "./functions/static";
 import DashboardLocker from "./routes/lockers/pages/dashboard";
 import { signedCookie } from "cookie-parser";
+import "./functions/required-env-data";
 
 const PORT = (process.env.PORT || 3000) as number;
 const app = express();
