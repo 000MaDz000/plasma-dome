@@ -1,23 +1,290 @@
 {
+    "Locales": {
+        "ar": "العربية",
+        "en": "الإنجليزية"
+    },
     "Index": {
-        "title": "Plasmadome",
+        "title": "بلازما دوم",
         "body": {
             "header": "مدينة القبة",
             "line1": "اختر عربتك",
             "line2": "املأها"
         },
         "footer": {
-            "contact": "اتصل بنا",
-            "facebook": "Facebook",
-            "twitter": "Twitter"
+            "contact": "اتصل",
+            "facebook": "فيسبوك",
+            "twitter": "تويتر"
+        },
+        "sections": "الأقسام"
+    },
+    "User": {
+        "your cart": "عربتك",
+        "your orders": "طلباتك"
+    },
+    "Dashboard": {
+        "add": "إضافة",
+        "home": {
+            "summary sales": "ملخص المبيعات",
+            "summary success orders": "ملخص الطلبات الناجحة",
+            "last orders": "الطلبات الأخيرة",
+            "products": "المنتجات"
+        },
+        "links": {
+            "home": "الرئيسية",
+            "orders": "الطلبات",
+            "products": "المنتجات",
+            "users": "المستخدمون",
+            "ads": "الإعلانات",
+            "recommendations": "التوصيات"
+        },
+        "header": {
+            "notifications": "الإشعارات",
+            "your account": "حسابك"
+        },
+        "products": {
+            "create product": "إنشاء منتج جديد",
+            "addToCart": "أضف إلى العربة",
+            "name": "اسم المنتج",
+            "description": "وصف المنتج",
+            "quantity": "الكمية",
+            "discount": "الخصم",
+            "categories": "الفئات",
+            "images": "صورة المنتج",
+            "price": "السعر",
+            "update": "تحديث",
+            "delete": "حذف",
+            "confirm edit": "تأكيد",
+            "upload image": "رفع الصورة",
+            "show more": "عرض المزيد",
+            "count": "إجمالي عدد المنتجات",
+            "recommended count": "ننصح بإضافة {recommended} منتج على الأقل",
+            "show type": "نوع العرض",
+            "normal": "عادي",
+            "featured": "مميز",
+            "show type level": "مستوى العرض",
+            "featured count": "عدد المنتجات المميزة",
+            "normal count": "عدد المنتجات العادية",
+            "submit edit": "حفظ",
+            "discount persent": "{discount} %",
+            "total": "السعر الإجمالي"
+        },
+        "orders": {
+            "are you sure": "هل أنت متأكد من إلغاء الطلب؟",
+            "customer name": "اسم العميل",
+            "customer phone": "هاتف العميل",
+            "delevery location": "موقع التسليم",
+            "date": "التاريخ",
+            "state": "الحالة",
+            "total price": "السعر الإجمالي",
+            "pending": "قيد الانتظار",
+            "ended": "منتهية",
+            "canceled": "ملغاة",
+            "egp": "{price} جنيه",
+            "no data": "لا توجد طلبات حتى الآن!",
+            "orders count": "الطلبات المتاحة {count}",
+            "ended orders count": "الطلبات المنتهية {count}",
+            "pending orders count": "الطلبات قيد الانتظار {count}",
+            "ended confirm": "وضع علامة منتهية",
+            "cancel order": "إلغاء الطلب",
+            "is ended": "هل الطلب منتهي؟",
+            "mark as ended alert": "عند الضغط على هذا الزر، سيتم إنهاء الطلب",
+            "count": "عدد الطلبات",
+            "status": {
+                "pending": "قيد الانتظار",
+                "completed": "مكتمل",
+                "shipped": "تم الشحن",
+                "cancelled": "ملغاة"
+            },
+            "chart": {
+                "success orders": "الطلبات الناجحة",
+                "canceled orders": "الطلبات الملغاة",
+                "live orders": "الطلبات قيد الانتظار",
+                "total orders": "إجمالي الطلبات {ordersCount}"
+            },
+            "months": {
+                "1": "يناير",
+                "2": "فبراير",
+                "3": "مارس",
+                "4": "أبريل",
+                "5": "مايو",
+                "6": "يونيو",
+                "7": "يوليو",
+                "8": "أغسطس",
+                "9": "سبتمبر",
+                "10": "أكتوبر",
+                "11": "نوفمبر",
+                "12": "ديسمبر"
+            }
+        },
+        "sales": {
+            "chart label": "قيمة المبيعات"
+        },
+        "users": {
+            "customer title": "العملاء",
+            "admin title": "المدراء",
+            "employee title": "الموظفون",
+            "table": {
+                "name": "الاسم",
+                "phone": "رقم الهاتف",
+                "role": "الدور",
+                "country": "البلد",
+                "permissions": {
+                    "admin": "مدير",
+                    "customer": "عميل",
+                    "employee": "موظف",
+                    "root admin error": "لا يمكن تعديل صلاحيات الحساب الرئيسي"
+                },
+                "options title": "منح وإزالة صلاحيات المستخدم",
+                "no data": "لا توجد بيانات",
+                "show more": "عرض المزيد",
+                "mark as admin": "تعيين كمدير",
+                "mark as employee": "تعيين كموظف",
+                "remove admin role": "إزالة دور المدير",
+                "remove employee role": "إزالة دور الموظف"
+            }
+        },
+        "ads": {
+            "create ad": "إنشاء إعلان جديد",
+            "available ads": "الإعلانات",
+            "creation date": "تاريخ الإنشاء",
+            "barname": "اسم الشريط",
+            "redirect link": "رابط التوجيه",
+            "status": "الحالة",
+            "active": "نشط",
+            "not active": "غير نشط",
+            "no data": "لا توجد بيانات",
+            "submit create": "إنشاء الإعلان",
+            "upload images": "رفع الصور",
+            "save changes": "حفظ التغييرات",
+            "delete": "حذف",
+            "save tooltip": "حفظ حالة الإعلان إلى {value}",
+            "delete tooltip": "حذف لافتة الإعلان"
+        },
+        "recommendations": {
+            "id": "معرف",
+            "category": "الفئة",
+            "categories": "الفئات",
+            "recommended categories": "الفئات الموصى بها",
+            "no recommended categories": "لا توجد فئات موصى بها حتى الآن!",
+            "no categories": "لا توجد فئات محددة حتى الآن!",
+            "confirm": "تأكيد",
+            "errors": {
+                "no category provided": "يرجى إدخال اسم الفئة",
+                "already exists": "الفئة مضافة بالفعل",
+                "permission denied": "ليس لديك هذا الإذن",
+                "not exists": "الفئة غير موجودة"
+            }
+        }
+    },
+    "Store": {
+        "header": {
+            "searchPlaceholder": "ابحث هنا",
+            "your cart": "عربتك",
+            "your orders": "طلباتك",
+            "you": "أنت"
+        },
+        "body": {
+            "product": {
+                "addToCart": "أضف إلى العربة",
+                "name": "اسم المنتج",
+                "description": "وصف المنتج",
+                "quantity": "الكمية",
+                "categories": "الفئات",
+                "image": "صورة المنتج",
+                "price": "السعر",
+                "update": "تحديث",
+                "delete": "حذف",
+                "empty cart": "عربتك التسوقية فارغة!",
+                "close cart": "أغلق العربة",
+                "confirm edit": "تأكيد",
+                "confirm order": "تأكيد الطلب",
+                "egp": "{price} جنيه",
+                "discount": "الخصم",
+                "total": "السعر الإجمالي",
+                "discount persent": "{discount} %"
+            },
+            "order": {
+                "fill fields": "يرجى ملء الحقول",
+                "name": "اسمك",
+                "mobile": "هاتفك",
+                "code": "رمز التحقق",
+                "confirm data": "تأكيد البيانات",
+                "invalid code": "الرمز غير صحيح",
+                "cart orders": "منتجات عربتك",
+                "location": "موقع التسليم"
+            },
+            "alerts": {
+                "close": "إغلاق"
+            },
+            "no data": "لا توجد منتجات في هذه الصفحة!",
+            "no data help": "حاول البحث عن منتجك"
+        },
+        "search": {
+            "no search data": "لا توجد منتجات لـ \"{searchString}\"",
+            "no data help": "حاول كتابة مصطلحات عامة"
+        }
+    },
+    "Signup": {
+        "page-title": "انضم إلى بلازما دوم - مدينة القبة",
+        "description": "كن جزءًا من مجتمع بلازما دوم. سجل الآن لبدء الطلب والتوفير.",
+        "title": "انضم إلى بلازما دوم",
+        "email-or-mobile": "رقم الهاتف أو البريد الإلكتروني",
+        "button": "تأكيد",
+        "google-button": "سجل باستخدام جوجل",
+        "facebook-button": "سجل باستخدام فيسبوك",
+        "code-input": "رمز التحقق",
+        "code-confirm": "تأكيد الرمز",
+        "enter-code-title": "اكتب رمز التحقق",
+        "invalid-code": "الرمز غير صحيح"
+    },
+    "Login": {
+        "page title": "انضم إلى بلازما دوم - مدينة القبة",
+        "enter name": "يرجى إدخال اسمك",
+        "enter mobile": "يرجى إدخال رقم هاتفك",
+        "enter password": "كلمة المرور",
+        "enter code": "تم إرسال الرمز إليك",
+        "enter confirm password": "يرجى تأكيد كلمة المرور",
+        "name": "اسمك",
+        "mobile": "رقم هاتفك",
+        "password": "كلمة المرور",
+        "code": "رمز التحقق",
+        "confirm password": "تأكيد كلمة المرور",
+        "next": "التالي",
+        "errors": {
+            "mobile number not provided": "رقم الهاتف مطلوب",
+            "code not provided": "رمز التحقق مطلوب",
+            "wrong code": "الرمز غير صحيح",
+            "password length": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
+            "wrong password": "كلمة المرور غير صحيحة",
+            "unknown type": "حدث خطأ غير معروف"
+        },
+        "alerts": {
+            "see your recommendations": "شاهد توصياتك",
+            "dont have account": "ليس لديك حساب؟",
+            "create account": "إنشاء حساب"
         }
     },
     "branches": {
         "paints": {
-            "title": "البوادر",
+            "title": "الدهانات",
             "content": "اختر لون منزلك"
+        },
+        "electronics": {
+            "title": "الإلكترونيات",
+            "content": "اختر من بين مجموعة واسعة من الأجهزة الإلكترونية والأجهزة المنزلية."
         }
     },
-    "signup": "التسجيل",
-    "login": "تسجيل الدخول"
+    "Links": {
+        "terms": {
+            "title": "الشروط",
+            "payments": "المدفوعات",
+            "purchase": "الشراء",
+            "returns-exchanges": "الإرجاع والتبديل"
+        }
+    },
+    "signup": "سجل",
+    "login": "تسجيل الدخول",
+    "responses": {
+        "unsupported-format": "الصيغة غير مدعومة"
+    }
 }
