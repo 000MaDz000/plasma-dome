@@ -199,7 +199,9 @@
                 "confirm edit": "Confirm",
                 "confirm order": "Confirm Order",
                 "egp": "{price} EGP",
-                "total": "Total Price"
+                "discount": "Discount",
+                "total": "Total Price",
+                "discount persent": "{discount} %"
             },
             "order": {
                 "fill fields": "Please Fill The Fields",

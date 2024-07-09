@@ -71,6 +71,7 @@ export default function productsTableRow(props: { product: ICartProduct, systemC
         }
     };
 
+    console.log(product.discount, product.price);
 
     return (
         <>

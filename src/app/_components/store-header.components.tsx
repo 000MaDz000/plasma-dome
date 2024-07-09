@@ -49,6 +49,7 @@ export default function StoreHeaderComponents() {
                 placeholder={t("searchPlaceholder")}
                 onKeyDown={handleSearch}
                 defaultValue={searchParams.get("search")}
+                type="search"
             />
         </>
     )

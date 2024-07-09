@@ -27,7 +27,10 @@ export default async function ProductCard({ isAddedToCart, product, hideAddToCar
 
 
             <CardActions className="flex flex-col cursor-auto">
-                <Typography color={"green"} >{product.price} EGP</Typography>
+                <Typography className={product.discount ? "text-red-500 line line-through" : "text-green-600"}>{product.price} EGP</Typography>
+                {product.discount && (
+                    <Typography className="text-green-600">{t("body.product.egp", { price: product.price - ((product.price * product.discount) / product.price) })}</Typography>
+                )}
                 {
                     !hideAddToCart &&
                     <AddToCartButton productId={product._id.toString()} />

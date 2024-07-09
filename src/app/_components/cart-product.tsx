@@ -10,7 +10,8 @@ export default function CartProduct({ product, onUpdate }: { product: ICartProdu
     const t = useTranslations("Store.body.product");
     const [isUpdate, setIsUpdate] = useState(false);
     const [changeQuantity, setChangeQuantity] = useState("");
-
+    const discount = product.discount ? product.price * product.discount / 100 : 0;
+    const totalPiece = product.price - discount;
 
     const removeFromCart = async () => {
         await DeleteFromCart(product._id);
@@ -33,8 +34,13 @@ export default function CartProduct({ product, onUpdate }: { product: ICartProdu
                 <CardContent>
                     <Typography className="flex justify-between ">{t("name")}: <span>{product.name}</span></Typography>
                     <Typography className="flex justify-between ">{t("price")}:<span>{t("egp", { price: product.price })}</span></Typography>
+                    {
+                        product.discount && (
+                            <Typography className="flex justify-between ">{t("discount")}:<span>{t("egp", { price: discount })}</span></Typography>
+                        )
+                    }
                     <Typography className="flex justify-between ">{t("quantity")}: <span>{product.quantity}</span></Typography>
-                    <Typography className="flex justify-between ">{t("total")}: <span>{t("egp", { price: product.price * product.quantity })}</span></Typography>
+                    <Typography className="flex justify-between ">{t("total")}: <span>{t("egp", { price: totalPiece * product.quantity })}</span></Typography>
                 </CardContent>
             </div>
 

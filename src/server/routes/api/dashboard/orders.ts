@@ -1,5 +1,5 @@
 import { Request, Router } from "express";
-import { Order, Statistics } from "../../../../models";
+import { Order, Statistics, User } from "../../../../models";
 import { ObjectId } from "bson";
 import { IStatisticsName } from "@/models/statistics";
 import DashboardLocker from "../../lockers/pages/dashboard";
@@ -21,8 +21,9 @@ OrdersRoute.post("/", async (req, res) => {
             total += (product.price - discount) * product.quantity;
         }
 
+        const user = await User.findOne({ mobile: req.session.user?.mobile });
         const order = new Order({
-            "customerName": req.session.user?.name,
+            "customerName": req.session.user?.name || user?.name,
             "customerPhone": req.session.user?.mobile,
             "totalPrice": total,
             "products": orderData,
@@ -48,7 +49,9 @@ OrdersRoute.post("/", async (req, res) => {
         );
     }
     catch (err) {
-        res.sendStatus(400);
+        console.log(err);
+
+        res.status(400).redirect("/orders/create");
     }
 });
 

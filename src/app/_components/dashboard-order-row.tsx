@@ -34,12 +34,12 @@ export default function DashboardOrderRow({ order, onChangeStatus, userAlertsRol
                     <Select value={order.status || "pending"} onChange={(e) => changeStatus(e.target.value as IOrderStatus)}>
 
                         {(userAlertsRole == "admin" || userAlertsRole == "employee") ? (
-                            <>
-                                <MenuItem value={"pending"}>{t("status.pending")}</MenuItem>
-                                <MenuItem value={"shipped"}>{t("status.shipped")}</MenuItem>
-                                <MenuItem value={"completed"}>{t("status.completed")}</MenuItem>
-                                <MenuItem value={"cancelled"}>{t("status.cancelled")}</MenuItem>
-                            </>
+                            [
+                                <MenuItem value={"pending"} key="pending">{t("status.pending")}</MenuItem>,
+                                <MenuItem value={"shipped"} key="shipped">{t("status.shipped")}</MenuItem>,
+                                <MenuItem value={"completed"} key="completed">{t("status.completed")}</MenuItem>,
+                                <MenuItem value={"cancelled"} key="cancelled">{t("status.cancelled")}</MenuItem>,
+                            ]
                         ) : (
                             <MenuItem value={order.status} >{t("status." + order.status)}</MenuItem>
                         )}

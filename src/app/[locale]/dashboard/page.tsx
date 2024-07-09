@@ -34,7 +34,7 @@ export default async function DashboardHome() {
                             <Typography variant="h6" marginTop={1} marginLeft={1}>{t("last orders")}</Typography>
 
                             <Box className="overflow-y-auto max-h-screen">
-                                <DashboardOrdersTable />
+                                <DashboardOrdersTable userAlertsRole="admin" />
                             </Box>
                         </div>
                     </Paper>

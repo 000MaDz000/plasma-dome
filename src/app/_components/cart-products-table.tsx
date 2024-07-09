@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 export default function CreateOrderPage({ setDisabled }: { setDisabled?: (val: boolean) => void }) {
     const [data, setData] = useState<ICartProduct[]>([]);
     const [pending, setPending] = useState(true);
+    const [discount, setDiscount] = useState(0);
     const t = useTranslations("Store.body.product")
 
 
@@ -15,8 +16,18 @@ export default function CreateOrderPage({ setDisabled }: { setDisabled?: (val: b
         if (!pending) return;
 
         getCartData().then(cart => {
-            setData([...data, ...cart]);
+            let totalDiscount = 0;
+
+            setData([...data, ...cart.map(v => {
+                if (v.discount) {
+                    let discountValue = (v.price * v.discount / 100);
+                    totalDiscount += discountValue;
+                }
+                return v;
+            })]);
+
             setPending(false);
+            if (totalDiscount) setDiscount(totalDiscount);
         });
 
     }, [pending]);
@@ -35,6 +46,7 @@ export default function CreateOrderPage({ setDisabled }: { setDisabled?: (val: b
                         <TableCell>{t("image")}</TableCell>
                         <TableCell>{t("name")}</TableCell>
                         <TableCell>{t("price")}</TableCell>
+                        {discount && <TableCell>{t("discount")}</TableCell>}
                         <TableCell>{t("quantity")}</TableCell>
                         <TableCell>{t("total")}</TableCell>
                     </TableRow>
@@ -46,8 +58,11 @@ export default function CreateOrderPage({ setDisabled }: { setDisabled?: (val: b
                             <TableCell><img src={product.images[0]} className="max-w-16" /></TableCell>
                             <TableCell>{product.name}</TableCell>
                             <TableCell>{t("egp", { price: product.price })}</TableCell>
+                            {discount && (
+                                product.discount ? <TableCell>{t("discount persent", { discount: product.discount })}</TableCell> : <TableCell></TableCell>
+                            )}
                             <TableCell>{product.quantity}</TableCell>
-                            <TableCell>{t("egp", { price: product.price * product.quantity })}</TableCell>
+                            <TableCell>{t("egp", { price: product.discount ? (product.price - (product.price * product.discount / 100)) * product.quantity : product.price * product.quantity })}</TableCell>
                         </TableRow>
                     ))}
 

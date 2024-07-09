@@ -116,10 +116,10 @@ ProductsRoute.post("/", DashboardLocker, multer().single("images"), async (req: 
         // save the product
         await saveProduct.save();
 
-        res.sendStatus(200);
+        res.status(200).redirect("/dashboard/products");
     }
     catch (err) {
-        res.sendStatus(500);
+        res.status(500).redirect("/dashboard/products");
         // console.log(err);
     }
 });

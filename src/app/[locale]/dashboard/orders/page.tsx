@@ -32,7 +32,7 @@ export default async function DashboardOrdersPage() {
                     </Paper>
 
                     <Paper className="overflow-x-auto p-7 text-nowrap">
-                        <DashboardOrdersTable />
+                        <DashboardOrdersTable userAlertsRole="admin" />
                     </Paper>
                 </Box>
             </Container>

@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { OrdersApi } from "../_classes/api";
 import { IOrder, IOrderStatus } from "@/models/order";
 import DashboardOrderRow from "./dashboard-order-row";
-import EndOrder, { CancelOrder } from "../_actions/order";
 
 export default function DashboardOrdersTable({ userAlertsRole }: { userAlertsRole?: "admin" | "employee" | "customer" }) {
     const t = useTranslations("Dashboard.orders");
@@ -27,6 +26,7 @@ export default function DashboardOrdersTable({ userAlertsRole }: { userAlertsRol
             setData(data.map(val => val._id === orderId ? { ...val, status: newStatus } : val));
         });
     }
+
 
     return (
         <>

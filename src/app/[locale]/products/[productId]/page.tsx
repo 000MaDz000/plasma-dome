@@ -13,7 +13,9 @@ export default async function ProductPage({ params }: { params: { locale: string
         <div className="grow flex flex-col gap-8">
             <Container>
                 <div className="grow flex flex-col lg:flex-row gap-4 bg-gray-200 p-3">
+
                     <div className="flex-1 flex justify-between mx-auto w-full bg-slate-50">
+
                         <div className="flex items-center justify-center w-full min-w-44">
                             {/* {
                             product?.images.map(img => (
@@ -23,23 +25,21 @@ export default async function ProductPage({ params }: { params: { locale: string
                             <img src={(product?.images[0] as any).relativeUrl} alt="" className="max-w-full" />
                         </div>
 
-
-                        <div className="lg:hidden m-9">
-                            <Typography mx={2}>{product?.name}</Typography>
-                        </div>
-
-
                     </div>
 
-                    <div className="flex-grow-[2] p-4 flex flex-col justify-between">
+                    {/* product text data */}
+                    <div className=" p-4 flex flex-col justify-between">
 
-                        <div className="flex flex-col">
+                        <div className="flex flex-col grow">
 
                             <div>
-                                <Typography variant="h6">{t("egp", { price: product?.price })}</Typography>
+                                <Typography variant="h6" className={product?.discount ? "line-through text-red-600" : "text-gree-600"}>{t("egp", { price: product?.price })}</Typography>
+                                {product?.discount && (
+                                    <Typography variant="h6" className="text-green-600">{t("egp", { price: product.price - (product.price * product.discount / 100) })}</Typography>
+                                )}
                             </div>
 
-                            <div className="hidden lg:block">
+                            <div className="">
                                 <Typography my={2}>{product?.name}</Typography>
                             </div>
 
@@ -54,6 +54,7 @@ export default async function ProductPage({ params }: { params: { locale: string
                             <AddToCartButton productId={productId} contained fullWidth />
                         </div>
                     </div>
+
                 </div>
 
                 <div className="grow"></div>

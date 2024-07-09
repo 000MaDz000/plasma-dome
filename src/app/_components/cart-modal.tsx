@@ -16,9 +16,10 @@ export default function CartModal({ open, onClose }: { open: boolean, onClose: (
     const totalPrice = useMemo(() => {
         let total = 0;
         for (let product of cartData) {
-            total += product.price * product.quantity;
+            const discount = product.discount ? product.price * product.discount / 100 : 0;
+            total += (product.price - discount) * product.quantity;
         }
-        return total
+        return total;
     }, [cartData]);
 
     const t = useTranslations("Store.body.product");
