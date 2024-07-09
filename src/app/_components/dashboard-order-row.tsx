@@ -31,14 +31,19 @@ export default function DashboardOrderRow({ order, onChangeStatus, userAlertsRol
                 <TableCell align="center" onClick={() => setModal(true)}>{order.deleveryAddress || "-"}</TableCell>
                 <TableCell align="center" onClick={() => setModal(true)}>{order.orderDate.toString()}</TableCell>
                 <TableCell align="center" onClick={() => setModal(true)}>
-                    <FormControl>
-                        <Select value={order.status || "pending"} onChange={(e) => changeStatus(e.target.value as IOrderStatus)}>
-                            <MenuItem value={"pending"}>{t("status.pending")}</MenuItem>
-                            <MenuItem value={"shipped"}>{t("status.shipped")}</MenuItem>
-                            <MenuItem value={"completed"}>{t("status.completed")}</MenuItem>
-                            <MenuItem value={"cancelled"}>{t("status.cancelled")}</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <Select value={order.status || "pending"} onChange={(e) => changeStatus(e.target.value as IOrderStatus)}>
+
+                        {(userAlertsRole == "admin" || userAlertsRole == "employee") ? (
+                            <>
+                                <MenuItem value={"pending"}>{t("status.pending")}</MenuItem>
+                                <MenuItem value={"shipped"}>{t("status.shipped")}</MenuItem>
+                                <MenuItem value={"completed"}>{t("status.completed")}</MenuItem>
+                                <MenuItem value={"cancelled"}>{t("status.cancelled")}</MenuItem>
+                            </>
+                        ) : (
+                            <MenuItem value={order.status} >{t("status." + order.status)}</MenuItem>
+                        )}
+                    </Select>
                 </TableCell>
                 <TableCell align="center" onClick={() => setModal(true)}>{t("egp", { price: order.totalPrice })}</TableCell>
 
@@ -54,7 +59,7 @@ export default function DashboardOrderRow({ order, onChangeStatus, userAlertsRol
                     <TableRow>
                         <TableCell colSpan={6} >
                             <Paper variant="outlined">
-                                <ProductsTable products={order.products} />
+                                <ProductsTable products={order.products} userAlertsRole={userAlertsRole} />
                             </Paper>
                         </TableCell>
                     </TableRow>

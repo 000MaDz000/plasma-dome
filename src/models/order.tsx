@@ -9,12 +9,7 @@ export interface IOrder {
     deleveryAddress: string;
     orderDate: Date;
     products: ICartProduct[];
-    ended: boolean;
-    status?: IOrderStatus,
-    cancled?: {
-        status: boolean;
-        reason: string;
-    }
+    status: IOrderStatus,
     totalPrice: number;
 }
 

@@ -8,7 +8,7 @@ import { ICartProduct } from "../_actions/get-cart-data";
 import ProductsTableRow from "./products-table-row";
 import getSetting from "../_actions/get-setting";
 
-export default function ProductsTable({ products, systemCategories }: { products?: ICartProduct[], systemCategories?: string[] }) {
+export default function ProductsTable({ products, systemCategories, userAlertsRole }: { products?: ICartProduct[], systemCategories?: string[], userAlertsRole?: "admin" | "employee" | "customer" }) {
     const t = useTranslations("Dashboard.products");
     const [data, setData] = useState<ICartProduct[]>(products ? products : []);
     const [isPending, setIsPending] = useState(products ? false : true);
@@ -48,7 +48,7 @@ export default function ProductsTable({ products, systemCategories }: { products
                 </TableHead>
 
                 <TableBody>
-                    {data.map((p) => <ProductsTableRow product={p} key={p._id} systemCategories={categories || []} api={api} />)}
+                    {data.map((p) => <ProductsTableRow product={p} key={p._id} systemCategories={categories || []} api={api} changeModal={false} />)}
 
                 </TableBody>
             </Table>

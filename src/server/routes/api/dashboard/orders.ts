@@ -7,6 +7,51 @@ import { IOrderStatus } from "@/models/order";
 
 const OrdersRoute = Router();
 
+OrdersRoute.post("/", async (req, res) => {
+    try {
+        if (!req.session.authorized) return res.redirect("/login");
+
+        const deleveryAddress = "";
+        const orderData = req.session.cart?.products;
+
+        if (!orderData || !orderData.length) return res.redirect("/store");
+        let total = 0;
+        for (let product of orderData) {
+            const discount = product.discount ? ((product.price * product.discount) / 100) : 0;
+            total += (product.price - discount) * product.quantity;
+        }
+
+        const order = new Order({
+            "customerName": req.session.user?.name,
+            "customerPhone": req.session.user?.mobile,
+            "totalPrice": total,
+            "products": orderData,
+            deleveryAddress,
+        });
+
+        await order.save();
+
+        req.session.cart = { products: [] };
+        res.status(200).redirect("/user");
+
+        // statistics
+        const statisticName: IStatisticsName = "liveOrders";
+
+        await Statistics.updateOne(
+            { name: statisticName },
+            {
+                $inc: {
+                    count: 1
+                }
+            },
+            { upsert: true },
+        );
+    }
+    catch (err) {
+        res.sendStatus(400);
+    }
+});
+
 OrdersRoute.get("/?", async (req: Request<{}, {}, {}, { lastId?: string, month?: number, ended?: string }>, res) => {
     try {
         if (!req.session.authorized) return res.json([]);
@@ -84,21 +129,66 @@ OrdersRoute.put("/:orderId", DashboardLocker, async (req: Request<{ orderId: str
 
 
         // change statistice
-        switch (status) {
-            case "cancelled":
+        let name: IStatisticsName | null = null;
+        let decrementName: IStatisticsName | null = null;
 
-                break;
-
-            case "completed":
-                break;
-
+        switch (order.status) {
             case "pending":
+                decrementName = "liveOrders";
                 break;
 
             case "shipped":
+                decrementName = "liveOrders";
+                break;
+
+            case "cancelled":
+                decrementName = "canceledOrders";
+                break;
+
+            case "completed":
+                decrementName = "endedOrders";
                 break;
 
         }
+
+        switch (status) {
+            case "cancelled":
+                name = "canceledOrders";
+                break;
+
+            case "completed":
+                name = "endedOrders"
+                break;
+
+            case "pending":
+                name = "liveOrders";
+                break;
+
+            case "shipped":
+                name = "liveOrders";
+                break;
+        }
+
+        // decrement the statistics of previous state
+        await Statistics.updateOne(
+            { name: decrementName },
+            { $inc: { count: -1 } },
+            { upsert: true },
+        )
+
+        // increment the statistics of the new state
+        await Statistics.updateOne(
+            {
+                name,
+            },
+            {
+                $inc: {
+                    count: 1
+                }
+            },
+            { upsert: true }
+        );
+
     }
     catch (err) {
         res.sendStatus(500);

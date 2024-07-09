@@ -38,4 +38,5 @@ export type ICartProduct = {
     categories: string[];
     description: string;
     price: number;
+    discount?: number
 };

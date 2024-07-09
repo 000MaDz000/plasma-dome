@@ -9,7 +9,7 @@ import { BiXCircle } from "react-icons/bi";
 import { ProductsApi } from "../_classes/api";
 import { FaTrash } from "react-icons/fa";
 
-export default function productsTableRow(props: { product: ICartProduct, systemCategories: string[], api: ProductsApi }) {
+export default function productsTableRow(props: { product: ICartProduct, systemCategories: string[], api: ProductsApi, changeModal?: boolean }) {
     const t = useTranslations("Dashboard");
     const [modalState, setModalState] = useState(false);
     const [product, setProduct] = useState(props.product);
@@ -89,45 +89,50 @@ export default function productsTableRow(props: { product: ICartProduct, systemC
                 </TableCell>
             </TableRow>
 
-            <Modal open={modalState} onClose={() => setModalState(false)}>
-                <div className="flex flex-col gap-7">
-                    {/* categories edit */}
-                    <Box>
-                        <Box className="grid grid-cols-[repeat(auto-fill,minmax(6rem,1fr))] grid-rows-[repeat(auto-fit,1fr)] gap-3">
-                            {product.categories.map(category => (
-                                <Box className="mb-4 bg-gray-200 p-3 flex flex-col" key={category}>
-                                    <Box className="flex justify-end">
-                                        <IconButton color="error" size="small" onClick={() => removeCategory(category)}>
-                                            <BiXCircle />
-                                        </IconButton>
+            {
+                props.changeModal !== false && (
 
-                                    </Box>
+                    <Modal open={modalState} onClose={() => setModalState(false)}>
+                        <div className="flex flex-col gap-7">
+                            {/* categories edit */}
+                            <Box>
+                                <Box className="grid grid-cols-[repeat(auto-fill,minmax(6rem,1fr))] grid-rows-[repeat(auto-fit,1fr)] gap-3">
+                                    {product.categories.map(category => (
+                                        <Box className="mb-4 bg-gray-200 p-3 flex flex-col" key={category}>
+                                            <Box className="flex justify-end">
+                                                <IconButton color="error" size="small" onClick={() => removeCategory(category)}>
+                                                    <BiXCircle />
+                                                </IconButton>
 
-                                    <Box>{category}</Box>
+                                            </Box>
+
+                                            <Box>{category}</Box>
+                                        </Box>
+                                    ))}
                                 </Box>
-                            ))}
-                        </Box>
 
-                        <Autocomplete disabled={false} options={props.systemCategories} renderInput={(p) => (
-                            <Box className="flex flex-col gap-4">
-                                <TextField {...p} placeholder={t("recommendations.category")} inputRef={ref} />
-                                <Button fullWidth variant="contained" onClick={() => addCategory(ref.current?.value as string)}>{t("add")}</Button>
+                                <Autocomplete disabled={false} options={props.systemCategories} renderInput={(p) => (
+                                    <Box className="flex flex-col gap-4">
+                                        <TextField {...p} placeholder={t("recommendations.category")} inputRef={ref} />
+                                        <Button fullWidth variant="contained" onClick={() => addCategory(ref.current?.value as string)}>{t("add")}</Button>
+                                    </Box>
+                                )}>
+
+                                </Autocomplete>
                             </Box>
-                        )}>
 
-                        </Autocomplete>
-                    </Box>
+                            <Box className="flex flex-col gap-3">
+                                <TextField variant="outlined" name="name" placeholder={t("products.name")} inputRef={nameRef} defaultValue={product.name} label={t("products.name")} />
+                                <TextField variant="outlined" name="price" placeholder={t("products.price")} inputRef={priceRef} defaultValue={product.price} label={t("products.price")} />
+                                <TextField variant="outlined" name="discount" placeholder={t("products.discount")} inputRef={discountRef} defaultValue={(product as any).discount} label={t("products.discount")} />
+                                <TextareaAutosize name="description" placeholder={t("products.description")} ref={descriptionRef} defaultValue={product.description} className="min-h-24 p-2 border" />
+                                <Button onClick={updateData}>{t("products.submit edit")}</Button>
+                            </Box>
 
-                    <Box className="flex flex-col gap-3">
-                        <TextField variant="outlined" name="name" placeholder={t("products.name")} inputRef={nameRef} defaultValue={product.name} label={t("products.name")} />
-                        <TextField variant="outlined" name="price" placeholder={t("products.price")} inputRef={priceRef} defaultValue={product.price} label={t("products.price")} />
-                        <TextField variant="outlined" name="discount" placeholder={t("products.discount")} inputRef={discountRef} defaultValue={(product as any).discount} label={t("products.discount")} />
-                        <TextareaAutosize name="description" placeholder={t("products.description")} ref={descriptionRef} defaultValue={product.description} className="min-h-24 p-2 border" />
-                        <Button onClick={updateData}>{t("products.submit edit")}</Button>
-                    </Box>
-
-                </div>
-            </Modal>
+                        </div>
+                    </Modal>
+                )
+            }
         </>
     )
 }

@@ -208,7 +208,8 @@
                 "code": "Verification Code",
                 "confirm data": "Confirm Data",
                 "invalid code": "The Code is Invalid",
-                "cart orders": "Your Cart Products"
+                "cart orders": "Your Cart Products",
+                "location": "Your Delivery Location"
             },
             "alerts": {
                 "close": "Close"
