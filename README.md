@@ -4,6 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 # add .env file
 without .env file the server will not start
 because the server require 2 variables
+<br/>
 #**1** - the server require **MONGO_CONNECTION_URL** Which represents the database connection URL
 <br/>
 #**2** the server required **COOKIES_SECRET_KEY** which represents the server key that will be used to sign the session id
