@@ -41,7 +41,10 @@ global.signedCookie = signedCookie;
 
     console.log("");
     console.log("preparing the next.js server ...".yellow);
-    await nextServer.prepare().catch((err) => throwFail("failed to start next.js"));
+    await nextServer.prepare().catch((err) => {
+        console.log(err);
+        throwFail("failed to start next.js");
+    });
     console.log("next.js server is now running".green, `on port: ${PORT}`.blue);
 
 

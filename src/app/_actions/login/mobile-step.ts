@@ -45,7 +45,8 @@ export default async function mobileStep(type: ValidateType, data: string, sess:
         return {
             type,
             success: true,
-            nextStep: "name"
+            nextStep: "name",
+            msg: sess.data.user.verifyCode,
         }
     }
 }

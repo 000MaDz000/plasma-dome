@@ -14,6 +14,7 @@ export type ValidateReturns = {
     errorMessage?: string;
     success: boolean;
     nextStep: null | string;
+    msg?: string;
 }
 
 export async function ValidateLoginStep(type: ValidateType, data: string): Promise<ValidateReturns> {
