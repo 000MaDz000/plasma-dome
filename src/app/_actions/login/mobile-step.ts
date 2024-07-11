@@ -5,6 +5,7 @@ import NextSession from "../../_classes/next-session";
 import { getTranslations } from "next-intl/server";
 import { User } from "@/app/_classes/models";
 import { ValidateReturns, ValidateType } from "../standard-login";
+import SendSMS from "./send-sms";
 
 export default async function mobileStep(type: ValidateType, data: string, sess: NextSession): Promise<ValidateReturns> {
     const t = await getTranslations("Login.errors");
@@ -37,6 +38,7 @@ export default async function mobileStep(type: ValidateType, data: string, sess:
 
         sess.data.user.mobile = data;
         sess.data.user.verifyCode = randomUUID().replaceAll("-", "").slice(0, 9);
+        await SendSMS(sess.data.user.mobile, sess.data.user.verifyCode);
         sess.save();
 
         console.log(sess.data.user.verifyCode);
