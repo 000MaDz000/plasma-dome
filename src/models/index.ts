@@ -8,7 +8,7 @@ import StatisticsModel, { IStatistics } from "./statistics";
 import AdvertismentModel, { IAdvertisment } from "./advertisment";
 import SettingsModel, { ISetting } from "./settings";
 
-const dbConnectionPromise = mongoose.connect(process.env.MONGO_CONNECTION_URL as string);
+const dbConnectionPromise = mongoose.connect(process.env.MONGO_URI as string);
 
 export default dbConnectionPromise;
 
