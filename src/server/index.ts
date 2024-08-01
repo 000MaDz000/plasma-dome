@@ -33,6 +33,8 @@ const sessionStore = MongoStore.create({
 global.appSessions = sessionStore;
 global.signedCookie = signedCookie;
 
+export default appSessions;
+
 (async () => {
     console.log("connecting to the database".yellow);
 
