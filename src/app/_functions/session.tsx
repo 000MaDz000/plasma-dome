@@ -1,6 +1,7 @@
 import { SessionData } from "express-session";
 import { cookies } from "next/headers";
 import NextSession from "../_classes/next-session";
+import { signedCookie } from "cookie-parser";
 
 export default async function session() {
     const cookie = cookies();
